@@ -1,0 +1,19 @@
+#leftBar
+{
+	background: red;
+	width: 400px;
+}
+
+#epilogesKatigorias
+{
+	background: green;
+	margin: auto;
+	width: 200px;
+}
+
+.odigia
+{
+	color: white;
+	font-size: 12px;
+	font-style: italic;
+}
