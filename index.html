@@ -6,12 +6,25 @@
 	<title>Κείμενα Χριστοδούλου</title>
 	<link rel="stylesheet" href="style/main.css">
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="style/theme.css">
 </head>
 <body>
 	<header class="w3-container w3-theme w3-center">
 		<p class="w3-xxlarge margin5top">ΒΑΣΗ ΔΕΔΟΜΕΝΩΝ ΚΕΙΜΕΝΩΝ ΧΡΙΣΤΟΔΟΥΛΟΥ</p>
 		<p class="w3-xlarge margin-40top">Πλήρης συλλογή λογοτεχνικών ακροβατισμών</p>
 	</header>	
+
+	<!-- Sidebar -->
+	<div class="w3-sidebar w3-bar-block w3-theme-l4 w3-animate-left" style="width:50%;display:block;z-index:4" id="mySidebar">
+		<button class="w3-right w3-button w3-large w3-red" id="closeButton">&#9747;</button>
+		<a href="#" class="w3-bar-item w3-button">Link 1</a> 
+		<a href="#" class="w3-bar-item w3-button">Link 2</a>
+		<a href="#" class="w3-bar-item w3-button">Link 3</a>
+	</div>
+
+	<!-- Overlay -->
+	<div class="w3-overlay" id="myOverlay"  style="cursor:pointer"></div>
+	<button class="w3-button w3-xxlarge" id="openButton" >&#9776;</button>"
 		<div class="w3-container w3-text">
 			<div id="leftBar">
 				<div id="epilogesKatigorias">
@@ -27,12 +40,14 @@
 				<div id="bara">εδώ θα μπει η μπάρα πλοήγησης</div>
 			</div>
 		</div>
-		<footer class="w3-theme-d5">
-			<!--	<div class="w3-tiny">Η χρήση των κειμένων είναι ελεύθερη εφόσον γίνεται σαφής αναφορά στον δημιουργό και δεν χρησιμοποιούνται για εμπορική χρήση. <BR>Επιτρέπεται η χρήση τους με εικόνα και ήχο, με την προϋπόθεση ότι το παράγωγο αποτέλεσμα θα έχει την ίδια «άδεια χρήσης». <BR>Όλα τα παραπάνω είναι η άδεια όπως περιγράφεται καλύτερα από την Creative Commons.-->
+		<footer class="w3-theme-d5" style="z-index:5">
+			<!--	<div class="w3-tiny">Η χρήση των κειμένων είναι ελεύθερη εφόσον γίνεται σαφής αναφορά στον δημιουργό και δεν χρησιμοποιούνται για εμπορική χρήση.<BR>Επιτρέπεται η χρήση τους με εικόνα και ήχο, με την προϋπόθεση ότι το παράγωγο αποτέλεσμα θα έχει την ίδια «άδεια χρήσης».<BR>Όλα τα παραπάνω είναι η άδεια όπως περιγράφεται καλύτερα από την Creative Commons.-->
 				<div class="w3-center">	
 					<p>Όλα τα πνευματικά δικαιώματα ανήκουν στον Στρατή Χριστοδούλου. Για χρήση των κειμένων πατήστε στο «Όροι Χρήσης».</p>
 					<div><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Άδεια Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></div>
 				</div>
 			</div>	</footer>	
+			<script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+			<script src="scripts/jscripts.js"></script>
 </body>
 </html>
