@@ -2,7 +2,7 @@
 <html lang="el">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="device-width, initial-scale=1">
 	<title>Κείμενα Χριστοδούλου</title>
 	<link rel="stylesheet" href="style/main.css">
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -14,39 +14,58 @@
 		<p class="w3-xlarge margin-40top">Πλήρης συλλογή λογοτεχνικών ακροβατισμών</p>
 	</header>	
 
-	<!-- Sidebar -->
-	<div class="w3-sidebar w3-bar-block w3-theme-l4 w3-animate-left" style="width:50%;display:block;z-index:4" id="mySidebar">
-		<button class="w3-right w3-button w3-large w3-red" id="closeButton">&#9747;</button>
-		<a href="#" class="w3-bar-item w3-button">Link 1</a> 
-		<a href="#" class="w3-bar-item w3-button">Link 2</a>
-		<a href="#" class="w3-bar-item w3-button">Link 3</a>
-	</div>
-
-	<!-- Overlay -->
-	<div class="w3-overlay" id="myOverlay"  style="cursor:pointer"></div>
-	<button class="w3-button w3-xxlarge" id="openButton" >&#9776;</button>"
+	<div class="w3-bar w3-theme-l4" style="display:none;z-index:4" id="mySidebar">
 		<div class="w3-container w3-text">
-			<div id="leftBar">
-				<div id="epilogesKatigorias">
-					<span class="odigia">εδώ θα μπει η δυνατότητα να περιορίζει το μέλος τις επιλογές από που θα εμφανίζονται εγγραφές</span>
-					<ul>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-					</ul>
+			<div class="w3-row">
+				<div class="w3-col s6">
+					<div class="margin5top w3-card-4 " style="width:90%;">
+						<header class="w3-container w3-blue">
+							<h1>Φίλτρα Βάσης Δεδομένων</h1>
+						</header>
+						<div class="w3-container">
+							<form id="category" class="w3-form " action="">
+								<input class="w3-radio w3-large" type="radio" name="cat" value="0" checked> Όλες οι κατηγορίες<br>
+								<input class="w3-radio" type="radio" name="cat" value="1"> Ποιητικά<br>
+								<input class="w3-radio" type="radio" name="cat" value="2"> Λογοπλοκίες<br>
+								<input class="w3-radio" type="radio" name="cat" value="3"> Μεγάλες Απορίες<br>
+								<input class="w3-radio" type="radio" name="cat" value="4"> Της ζωής τα δεδομένα 
+							</form>
+						</div> 
+						<footer class="margin5top w3-container w3-blue">
+							<h5></h5>
+						</footer>
+					</div>
 				</div>
-				<div id="bara">εδώ θα μπει η μπάρα πλοήγησης</div>
+				<div class="w3-col s6 w3-center">
+					<div class="margin5top w3-card-4 w3-center" style="width:90%">
+						<header class="w3-container w3-blue">
+							<h1>Ταξινόμηση</h1>
+						</header>
+						<div class="w3-container">
+							<p>φίλτρα</p>
+						</div>
+						<footer class="margin5top w3-container w3-blue">
+							<h5></h5>
+						</footer>
+					
+					</div>
+				
+				</div>
 			</div>
 		</div>
-		<footer class="w3-theme-d5" style="z-index:5">
+	</div>
+	<span class="odigia">εδώ θα μπει η δυνατότητα να περιορίζει το μέλος τις επιλογές από που θα εμφανίζονται εγγραφές</span>
+	<div id="bara">εδώ θα μπει η μπάρα πλοήγησης</div>
+	<div class="w3-center w3-theme-l4"><button class="w3-button" id="openButton">v</button></div>
+
+	<!-- <button class="w3-button w3-xxlarge" id="openButton" >&#9776;</button> -->"
+		<footer class="pagefooter w3-theme-d5" style="z-index:5">
 			<!--	<div class="w3-tiny">Η χρήση των κειμένων είναι ελεύθερη εφόσον γίνεται σαφής αναφορά στον δημιουργό και δεν χρησιμοποιούνται για εμπορική χρήση.<BR>Επιτρέπεται η χρήση τους με εικόνα και ήχο, με την προϋπόθεση ότι το παράγωγο αποτέλεσμα θα έχει την ίδια «άδεια χρήσης».<BR>Όλα τα παραπάνω είναι η άδεια όπως περιγράφεται καλύτερα από την Creative Commons.-->
 				<div class="w3-center">	
 					<p>Όλα τα πνευματικά δικαιώματα ανήκουν στον Στρατή Χριστοδούλου. Για χρήση των κειμένων πατήστε στο «Όροι Χρήσης».</p>
 					<div><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Άδεια Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></div>
 				</div>
-			</div>	</footer>	
+			</footer>	
 			<script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
 			<script src="scripts/jscripts.js"></script>
 </body>
