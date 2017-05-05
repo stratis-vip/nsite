@@ -8,13 +8,9 @@ include('class_lib.php');
 		{
 				$row = mysqli_fetch_array($result) ;
 				$source=substr($row['imnia_auth'],8,2)."/".substr($row['imnia_auth'],5,2)."/".substr($row['imnia_auth'],0,4);
-
 				echo "<div>Άυξων Αριθμός: #".$row['keimeno_id']."</div>";
 				echo "<span>Ημνία συγγραφής: ".$source."</span>";
-				echo "<div>Κείμενο: <br> <textarea rows=\"40\" cols=\"110\">".$row['keimeno']."</textarea></div>";
-			
-			
-			
+				echo "<div>Κείμενο: <br> <textarea rows=\"40\" cols=\"110\">".$row['keimeno']."</textarea></div>";	
 				echo "<div>Επεξήγηση: ".$row['eksigisi']."</div>";
 		}
 

@@ -1,5 +1,5 @@
 <?php
-require("scripts/class_lib.php");
+require("class_lib.php");
 $link= mysqli_connect($dbServ, $dbUser,	$dbPass,$dbDbase);
 mysqli_query($link,'set names UTF8');
 echo "[";
