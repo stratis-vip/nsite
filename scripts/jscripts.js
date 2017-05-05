@@ -5,17 +5,17 @@ key=0;
 $(document).ready(function(){
 	console.log("ready...");
 	$("#openButton").on('click',function(){
-		if ($("#openButton").text()==="Άνοιγμα Φίλτρων και Επιλογών Ταξινόμησης")
+		if ($("#openButton").text()==="Άνοιγμα Επιλογών")
 		{
-			$("#openButton").html("<button class=\"w3-button\">Kλείσιμο Φίλτρων και Eπιλογών Tαξινόμησης</button>");
+			$("#openButton").html("<button class=\"w3-button\">Kλείσιμο Eπιλογών</button>");
 			$("#mySidebar").css("display", "block");
-			$("#openButton").removeClass("w3-theme-l4").addClass("w3-theme-l2");
+			$("#openButton").removeClass("w3-theme-l3").addClass("w3-theme-l2");
 		}
 		else
 		{
-			$("#openButton").html("<button class=\"w3-button\">Άνοιγμα Φίλτρων και Επιλογών Ταξινόμησης</button>");
+			$("#openButton").html("<button class=\"w3-button\">Άνοιγμα Επιλογών</button>");
 			$("#mySidebar").css("display", "none");	
-			$("#openButton").addClass("w3-theme-l4").removeClass("w3-theme-l2");
+			$("#openButton").addClass("w3-theme-l3").removeClass("w3-theme-l2");
 		}
 
 	});
