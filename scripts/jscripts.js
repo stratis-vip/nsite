@@ -5,17 +5,17 @@ key=0;
 $(document).ready(function(){
 	console.log("ready...");
 	$("#openButton").on('click',function(){
-		if ($(this).text()==="Άνοιγμα Φίλτρων και Επιλογών Ταξινόμησης ")
+		if ($("#openButton").text()==="Άνοιγμα Φίλτρων και Επιλογών Ταξινόμησης")
 		{
-			$(this).text("Κλείσιμο Φίλτρων και Eπιλογών Tαξινόμησης ");
+			$("#openButton").html("<button class=\"w3-button\">Kλείσιμο Φίλτρων και Eπιλογών Tαξινόμησης</button>");
 			$("#mySidebar").css("display", "block");
-			$("#myOverlay").css("display","block");
+			$("#openButton").removeClass("w3-theme-l4").addClass("w3-theme-l2");
 		}
 		else
 		{
-			$(this).text("Άνοιγμα Φίλτρων και Επιλογών Ταξινόμησης ");
-			$("#mySidebar").css("display", "none");
-			$("#myOverlay").css("display","none");
+			$("#openButton").html("<button class=\"w3-button\">Άνοιγμα Φίλτρων και Επιλογών Ταξινόμησης</button>");
+			$("#mySidebar").css("display", "none");	
+			$("#openButton").addClass("w3-theme-l4").removeClass("w3-theme-l2");
 		}
 
 	});
@@ -43,5 +43,11 @@ $(document).ready(function(){
 //key είναι το κλειδί που θα χρησιμοποιήσω για να ταξινομήσω τα αποτελέσματα. Κατά #αριθμό ή κατά ημεροομηνία έκδοσης. Αυτό έχει ουσία όταν είναι το filter = 0	
 	$("#category").on("change",function(){
 		key=$('input[name=cat]:checked').val();
+	});
+	
+
+	$(".searchHeader").on("click",function(){
+		$(this).siblings().toggle();
+		console.log("dblClick on "+ $(this).name);
 	});
 });

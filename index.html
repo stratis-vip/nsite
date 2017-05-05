@@ -14,12 +14,15 @@
 		<p class="w3-large margin-20top">Πλήρης συλλογή λογοτεχνικών ακροβατισμών</p>
 	</header>	
 
+	<div id="openButton" class="w3-center w3-theme-l4 w3-large"><button class="w3-button">Άνοιγμα Φίλτρων και Επιλογών Ταξινόμησης</button></div>
+
 	<div class="w3-bar w3-theme-l4" style="display:none;z-index:4" id="mySidebar">
-		<div class="w3-container w3-text">
+		<div class="w3-container w3-text-theme">
 			<p class="margin-20top">&nbsp;</p>
 
+			<!--εδώ γίνεται η επιλογή της κατηγορίας του κειμένου-->
 			<div class="margin5top w3-card-4 " style="width:80%;margin:auto">
-				<header class="w3-container w3-blue">
+				<header class="w3-container w3-theme-d5 searchHeader">
 					<h4>Φίλτρα Βάσης Δεδομένων</h4>
 				</header>
 				<div class="w3-container">
@@ -30,44 +33,60 @@
 						<input class="w3-radio" type="radio" name="cat" value=3> Μεγάλες Απορίες<br>
 						<input class="w3-radio" type="radio" name="cat" value=4> Της ζωής τα δεδομένα 
 					</form>
+					<p>
 				</div> 
-				<footer class="margin5top w3-container w3-blue">
-					<h5></h5>
-				</footer>
 			</div>
 			<p class="margin-20top">&nbsp;</p>
-			<div class="margin5top w3-card-4 w3-center" style="width:80%;margin:auto">
-				<header class="w3-container w3-blue">
-					<h3>Ταξινόμηση</h3>
+			
+			<!--εδώ γίνεται η επιλογή της ταξινόμησης του κειμένου-->
+			<div class="margin5top w3-card-4 " style="width:80%;margin:auto">
+				<header class="w3-container w3-theme-d5 searchHeader">
+					<h4>Ταξινόμηση</h4>
 				</header>
 				<div class="w3-container">
-					<select class="w3-select" id="order">						
+					<p>
+					<select class="w3-select w3-theme-l5" id="order">						
 						<option value=1 selected>Αύξουσα σειρά</option>
 						<option value=2>Φθίνουσα σειρά</option>
 					</select>
-					<select class="w3-select" id="tax"> 
+					<p>
+					<select class="w3-select w3-theme-l5" id="tax"> 
 						<option value=0 selected>Χωρίς Ταξινόμηση</option>
 						<option value=1>Αριθμό καταχώρισης</option>
 						<option value=2>Χρονολογικά</option>
 					</select>
+					<p>
 				</div>
-				<footer class="margin5top w3-container w3-blue">
-					<h5></h5>
-				</footer>
+			</div>
+			<p class="margin-20top">&nbsp;</p>
+			
+			<!--εδώ γίνεται η εισαγωγή των κριτηρίων αναζήτησης-->
+			<div class="margin5top w3-card-4 " style="width:80%;margin:auto">
+				<header class="w3-container w3-theme-d5 searchHeader">
+					<h4>Αναζήτηση</h4>
+				</header>
+				<div class="w3-container w3-center">
+					<div>
+						<p>	
+						<input class="w3-input" type="text" placeholder="Κείμενο προς αναζήτηση">
+						<p>	
+						<button class="w3-btn w3-black w3-round-xxlarge">Αναζήτηση κειμένου που το περιέχει</button>
+						<button class="w3-btn w3-black w3-round-xxlarge">Αναζήτηση κειμένου επακριβώς</button>
+					</div>
+					<div>
+						<p>	
+						<input class="w3-input" type="text" placeholder="Αριθμός καταχώρησης προς αναζήτηση">
+						<p>	
+						<button class="w3-btn w3-black w3-round-xxlarge">Αναζήτηση</button>
+					</div>
+				</div>
 			</div>
 			<p class="margin-20top">&nbsp;</p>
 		</div>
 	</div>
-	<div class="w3-center w3-theme-l4"><button class="w3-button" id="openButton">Άνοιγμα Φίλτρων και Επιλογών Ταξινόμησης </div>
-
-	<!-- <button class="w3-button w3-xxlarge" id="openButton" >&#9776;</button> -->"
-		<footer class="pagefooter w3-theme-d5" style="z-index:5">
-			<!--	<div class="w3-tiny">Η χρήση των κειμένων είναι ελεύθερη εφόσον γίνεται σαφής αναφορά στον δημιουργό και δεν χρησιμοποιούνται για εμπορική χρήση.<BR>Επιτρέπεται η χρήση τους με εικόνα και ήχο, με την προϋπόθεση ότι το παράγωγο αποτέλεσμα θα έχει την ίδια «άδεια χρήσης».<BR>Όλα τα παραπάνω είναι η άδεια όπως περιγράφεται καλύτερα από την Creative Commons.-->
-				<div class="w3-center">	
-					<p>Όλα τα πνευματικά δικαιώματα ανήκουν στον Στρατή Χριστοδούλου.
-					<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Άδεια Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></p></div>
-			</footer>	
-			<script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
-			<script src="scripts/jscripts.js"></script>
+	<div id="apantiseis" class="w3-container w3-theme-l4">
+	</div>
+	<script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+	<script src="scripts/jscripts.js"></script>
 </body>
 </html>
