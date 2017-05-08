@@ -7,6 +7,7 @@
     <title>Κείμενα Χριστοδούλου</title>
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style/theme.css">
 </head>
 
@@ -16,18 +17,19 @@
         <p class="w3-large margin-20top w3-mobile">Πλήρης συλλογή λογοτεχνικών ακροβατισμών</p>
     </header>
 
-    <div id="openButton" class="w3-center w3-theme-l3 w3-large w3-mobile">
-        <button class="w3-button">Άνοιγμα Επιλογών</button>
-    </div>
+    <!-- εδω θα εμφανιζονται τα στατιστικα'της βασης δεδομενων -->
+    <div id="statistics" class="w3-bar w3-left w3-mobile w3-large w3-theme-l2 w3-xxlarge" style="padding-left:20px;cursor:pointer"><i class="fa">&#xf1fe;</i> Στατιστικά</div>
+    <div id="dbStatus" class="w3-center w3-card w3-mobile w3-xxlarge" style="display:none;width:50%;margin:auto;margin-top:65px;"></div>
+    <div id="openButton" class="w3-bar w3-left w3-theme-l3 w3-mobile w3-xxlarge" style="padding-left:20px;cursor:pointer"><i class="fa fa-cog "></i><span id="titleAllagi"> Άνοιγμα Επιλογών</span></div>
 
     <div class="w3-bar w3-theme-l4" style="display:none;z-index:4" id="mySidebar">
         <div class="w3-container w3-text-theme">
             <p class="margin-20top">&nbsp;</p>
 
             <!--εδώ γίνεται η επιλογή της κατηγορίας του κειμένου-->
-            <div class="margin5top w3-card-4 " style="width:80%;margin:auto">
+            <div class="margin5top w3-card-4 " style="width:80%;margin:auto;">
                 <header class="w3-container w3-theme-d5 searchHeader">
-                    <h4>Φίλτρα</h4>
+                    <h4 style="cursor:pointer">Φίλτρα</h4>
                 </header>
                 <div class="w3-container">
                     <form id="category" class="w3-form " action="">
@@ -41,7 +43,7 @@
             <!--εδώ γίνεται η επιλογή της ταξινόμησης του κειμένου-->
             <div class="margin5top w3-card-4 " style="width:80%;margin:auto">
                 <header class="w3-container w3-theme-d5 searchHeader">
-                    <h4>Ταξινόμηση</h4>
+                    <h4 style="cursor:pointer">Ταξινόμηση</h4>
                 </header>
                 <div class="w3-container">
                     <p />
@@ -63,7 +65,7 @@
             <!--εδώ γίνεται η εισαγωγή των κριτηρίων αναζήτησης-->
             <div class="margin5top w3-card-4 " style="width:80%;margin:auto">
                 <header class="w3-container w3-theme-d5 searchHeader">
-                    <h4>Αναζήτηση</h4>
+                    <h4 style="cursor:pointer">Αναζήτηση</h4>
                 </header>
                 <div class="w3-container w3-center">
                     <div>
@@ -84,11 +86,20 @@
             <p class="margin-20top">&nbsp;</p>
         </div>
     </div>
-    <div id="apantiseis" class="w3-container w3-theme-l5">
-	    test
+
+    <!-- εδω θα εμφανιζονται οι απαντησεις  -->
+    <div id="apantiseis" class="w3-container w3-theme-l4">
+        
+        <div id="navBar">
+            <button class="w3-button"> <i style="font-size:24px" class="fa">&#xf049;</i></button>
+            <button class="w3-button"> <i style="font-size:24px" class="fa">&#xf048;</i></button>
+	    <i> από τόσες </i>
+            <button class="w3-button"> <i style="font-size:24px" class="fa">&#xf051;</i></button>
+            <button class="w3-button"> <i style="font-size:24px" class="fa">&#xf050;</i></button>
+            <span id="curInfo" style="font-style:italic">test</span>
+        </div>
     </div>
-    <div id="statistics" class="w3-bar w3-center w3-mobile w3-large w3-theme-l2"><button class="w3-button w3-theme-l2">Στατιστικά</button></div>
-    <div id="dbStatus" class="w3-center w3-card w3-mobile" style="width:50%;margin:auto"></div>
+
     <script src="node_modules/jquery/dist/jquery.js"></script>
     <script src="scripts/jscripts.js?v=1"></script>
 </body>
