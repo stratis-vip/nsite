@@ -5,10 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="device-width, initial-scale=1">
     <title>Κείμενα Χριστοδούλου</title>
-    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="styles/mine/main.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style/theme.css">
+    <link rel="stylesheet" href="styles/mine/theme.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- Δοκιμαστικά πράματα -->
+    <script data-main="app/main" src="app/libs/require.js"></script>
+    <!--    <script>
+        require.config({
+            baseUrl: "app",
+            paths: {
+                "jquery": "libs/jquery.min"
+            }
+        });
+    </script>
+     Δοκιμαστικά πράματα -->
 </head>
 
 <body>
@@ -20,7 +33,7 @@
     <!-- εδω θα εμφανιζονται τα στατιστικα'της βασης δεδομενων -->
     <div id="statistics" class="w3-bar w3-left w3-mobile w3-large w3-theme-l2 w3-xlarge" style="padding-left:20px;cursor:pointer"><i class="fa">&#xf1fe;</i> Στατιστικά</div>
     <div class="w3-bar w3-theme-l4">
-        <div id="dbStatus" class="w3-center w3-card  w3-large" style="display:none;width:90%;margin:auto"></div>
+        <div id="dbStatus" class="w3-center w3-card  w3-large" style="display:none;width:90%;margin:auto">Εδώ θα εμφανίσω σε λίγο τα στατιστικά</div>
     </div>
     <div id="openButton" class="w3-bar w3-left w3-theme-l3 w3-mobile w3-xlarge" style="padding-left:20px;cursor:pointer"><i class="fa fa-cog "></i><span id="titleAllagi"> Άνοιγμα Επιλογών</span></div>
 
@@ -49,15 +62,15 @@
                 </header>
                 <div class="w3-container">
                     <p />
-                    <select class="w3-select w3-theme-l5" id="order">
-			    <option value=1 selected>Αύξουσα σειρά</option>
-			    <option value=2>Φθίνουσα σειρά</option>
-		    </select>
-                    <p />
                     <select class="w3-select w3-theme-l5" id="tax"> 
 			    <option value=0 selected>Χωρίς Ταξινόμηση</option>
 			    <option value=1>Αριθμό καταχώρισης</option>
 			    <option value=2>Χρονολογικά</option>
+		    </select>
+                    <p />
+                    <select class="w3-select w3-theme-l5" id="order" style="display:none">
+			    <option value=1 selected>Αύξουσα σειρά</option>
+			    <option value=2>Φθίνουσα σειρά</option>
 		    </select>
                     <p />
                 </div>
@@ -93,18 +106,21 @@
     <!-- εδω θα εμφανιζονται οι απαντησεις  -->
     <div id="apantiseis" class="w3-container w3-theme-l4">
 
-        <div id="navBar">
-            <button class="w3-button"> <i style="font-size:24px" class="fa">&#xf049;</i></button>
+        <div id="navBar" style="text-align:center;">
+            <button id="fisrtButton" class="w3-button"> <i style="font-size:24px" class="fa">&#xf049;</i></button>
             <button class="w3-button"> <i style="font-size:24px" class="fa">&#xf048;</i></button>
             <i> από τόσες </i>
             <button class="w3-button"> <i style="font-size:24px" class="fa">&#xf051;</i></button>
             <button class="w3-button"> <i style="font-size:24px" class="fa">&#xf050;</i></button>
-            <span id="curInfo" style="font-style:italic">test</span>
+            <div id="curInfo" style="font-style:italic">test</div>
+            <div id="database"></div>
         </div>
     </div>
 
-    <script src="node_modules/jquery/dist/jquery.js"></script>
-    <script src="scripts/jscripts.js?v=1"></script>
+    <!-- <script src="app/libs/jquery.min.js"></script> -->
+    <!-- <script src="scripts/jscripts.js?v=1"></script> -->
+    <!-- Δοκιμαστικά της requirejs-->
+    <div id="output"></div>
 </body>
 
 </html>
