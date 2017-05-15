@@ -16,11 +16,18 @@ define(['jquery'], function ($) {
                 }
             }
             query += ' LIMIT ' + count;
-            $('#database')
-                .html(query);
+            $.ajax({
+                type: "POST",
+                url: "app/scripts/php/getTheResults.php",
+                data: {"value":query},
+                success: function (data) {
+                    $("#database")
+                        .html(data);
+                },
+                datatype: "json"
+            });
         });
     }
-
     return {
         getStartAnartiseis: getStartAnartiseis
     };
