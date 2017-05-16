@@ -18,6 +18,7 @@ require(['jquery', 'scripts/ui'], function ($, ui) {
     $("#statistics")
         .on('click', ui.clickStatistics);
     ui.clickOnHeader();
+	ui.clickOnSearchButton();
     $("#openButton")
         .on('click', ui.clickOpenOptions);
 

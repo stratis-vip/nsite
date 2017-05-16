@@ -5,6 +5,8 @@ define(function () {
         self.taxOrder = "ASC";
         self.key = 0;
         self.katigories = {};
+        self.searchText = "";
+        self.searchNumber = "";
         self.setFilter = function (newFilter) {
             self.filter = newFilter;
             return self.filter;
@@ -21,6 +23,15 @@ define(function () {
             self.katigories = newObject;
             return self.katigories;
         };
+        self.setSearchText = function (newText) {
+            self.searchText = newText;
+            return self.searchText;
+        };
+        self.setSearchNumber = function (newText) {
+            self.searchNumber = newText;
+            return self.searchNumber;
+        };
+
     }
     return new vars();
 });

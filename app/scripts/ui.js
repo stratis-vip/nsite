@@ -32,10 +32,49 @@ define(['jquery'], function ($) {
             });
     }
 
+    function clickOnSearchButton() {
+        $("#searchButton")
+            .on("click", function () {
+                require(['jquery','scripts/dbinfo', 'scripts/variables'], function ($,info, vbl) {
+                    $.when(info.collectInfo())
+                        .then(
+                            function () {
+                                alert(vbl.searchText);
+                            }
+                        );
+                });
+                //δημιουργία ερωτήματος
+                //αποστολή ερωτήματος
+                //εμφάνιση αποτελεσμάτων
+            });
+    }
+
+    function clickOnSearchExactlyButton() {
+        $("#searchExactlyButton")
+            .on("click", function () {
+                //δημιουργία ερωτήματος
+                //αποστολή ερωτήματος
+                //εμφάνιση αποτελεσμάτων
+            });
+    }
+
+    function clickOnSearchByNumberButton() {
+        $("#searchByNumberButton")
+            .on("click", function () {
+                //δημιουργία ερωτήματος
+                //αποστολή ερωτήματος
+                //εμφάνιση αποτελεσμάτων
+            });
+    }
+
+
 
     return {
         clickStatistics: clickStatistics,
         clickOpenOptions: clickOpenOptions,
-        clickOnHeader: clickOnHeader
+        clickOnHeader: clickOnHeader,
+        clickOnSearchButton: clickOnSearchButton,
+        clickOnSearchExactlyButton: clickOnSearchExactlyButton,
+        clickOnSearchByNumberButton: clickOnSearchByNumberButton
     };
 });

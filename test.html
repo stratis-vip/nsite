@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="el">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+    <form action="">
+        <input type="text" id="test" placeholder="input Text">
+    </form>
+    <button id="b">press me</button>
+    <script src="app/libs/jquery.min.js"></script>
+    <script>
+        function getPromise(variable) {
+            var text = $('#test')
+                .val();
+	    $('#test').val(text+variable);
+        }
+        console.log('test');
+		var promise = getPromise('alfa');
+	$('#b').on('click',function(){
+	
+		  console.log('ετλείωσε');
+		});
+	
+	
+promise.then(function(result) {
+	  //we have our result here
+	  return getPromise(result); //return a promise here again
+}).then(function(result) {
+	  //handle the final result
+});
+    </script>
+</body>
+
+</html>
