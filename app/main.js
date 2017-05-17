@@ -18,7 +18,7 @@ require(['jquery', 'scripts/ui'], function ($, ui) {
     $("#statistics")
         .on('click', ui.clickStatistics);
     ui.clickOnHeader();
-	ui.clickOnSearchButton();
+    ui.clickOnSearchButton();
     $("#openButton")
         .on('click', ui.clickOpenOptions);
 
@@ -42,6 +42,15 @@ require(['jquery', 'scripts/ui'], function ($, ui) {
             .on("change", function () {
                 info.setDbInfo();
             });
+        $('#searchText')
+            .on('focusout', function () {
+                info.setDbInfo();
+            });
+        $('#searchNumberText')
+            .on('focusout', function () {
+                info.setDbInfo();
+            });
+
         $("#category")
             .on("change", function () {
                 info.setDbInfo();

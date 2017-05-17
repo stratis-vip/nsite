@@ -6,12 +6,11 @@ function makeJsonArray($keimeno)
     $localCounter        = 0;
     $counterApotelesmata = count($apotelesma);
     foreach ($apotelesma as $ap) {
-        $toPrint .= "{\"str\":\"" . addslashes($ap) . "\"}";
         $localCounter++;
         if ($counterApotelesmata == $localCounter) {
-            $toPrint .= "]";
+            $toPrint .=  '{"str":"'. addslashes($ap) . '"}]';
         } else {
-            $toPrint .= ",";
+            $toPrint .=  '{"str":"'. addslashes($ap) . '"},';
         }
     }
     return $toPrint;

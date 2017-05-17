@@ -35,13 +35,9 @@ define(['jquery'], function ($) {
     function clickOnSearchButton() {
         $("#searchButton")
             .on("click", function () {
-                require(['jquery','scripts/dbinfo', 'scripts/variables'], function ($,info, vbl) {
-                    $.when(info.collectInfo())
-                        .then(
-                            function () {
-                                alert(vbl.searchText);
-                            }
-                        );
+                require(['jquery', 'scripts/dbinfo', 'scripts/variables'], function ($, info, vbl) {
+                    info.setDbInfo();
+                    alert(vbl.searchText);
                 });
                 //δημιουργία ερωτήματος
                 //αποστολή ερωτήματος

@@ -2,6 +2,7 @@ define(['jquery'], function ($) {
     function getStartAnartiseis(count) {
         require(['scripts/variables'], function (vbl) {
             //χτίζω το ερώτημα στη βάση.
+            console.log('in getStartAnartiseis...');
             var query = '';
 
             query += 'SELECT keimena.* FROM keimena ';
@@ -19,14 +20,23 @@ define(['jquery'], function ($) {
             $.ajax({
                 type: "POST",
                 url: "app/scripts/php/getTheResults.php",
-                data: {"value":query},
+                data: {
+                    "value": query
+                },
                 success: function (data) {
+                    console.log('ajax in getStartAnartiseis return data');
+//                    require(['scripts/prepareResults'], function (prepareResults) {
+  //                      prepareResults.prepareResults(data);
+
+    //                });
                     $("#database")
                         .html(data);
+			console.log(data);
                 },
                 datatype: "json"
             });
         });
+        console.log('leaving getStartAnartiseis!');
     }
     return {
         getStartAnartiseis: getStartAnartiseis
