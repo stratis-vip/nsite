@@ -1,8 +1,8 @@
 <?php
 
-$htServ  = "http://dbase.texnopraksis.com/";
+$htServ  = "http://newdbase.texnopraksis.com/";
 $dbUser  = "dbaseuser";
-$dbServ="db23.papaki.gr";
+$dbServ="db22.papaki.gr";
 //$dbServ  = "127.0.0.1";
 $dbPass  = "Jqw6f0^9";
 $dbDbase = "collection";
