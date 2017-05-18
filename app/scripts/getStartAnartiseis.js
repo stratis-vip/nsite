@@ -25,13 +25,10 @@ define(['jquery'], function ($) {
                 },
                 success: function (data) {
                     console.log('ajax in getStartAnartiseis return data');
-//                    require(['scripts/prepareResults'], function (prepareResults) {
-  //                      prepareResults.prepareResults(data);
+                    require(['scripts/prepareResults'], function (prepareResults) {
+                       prepareResults.prepareResults(data);
 
-    //                });
-                    $("#database")
-                        .html(data);
-			console.log(data);
+                   });
                 },
                 datatype: "json"
             });

@@ -7,9 +7,9 @@ $count = 0;
 if ($result = mysqli_query($link, "SELECT * FROM `keimena_cat` order by `ID`")) {
     while ($row = mysqli_fetch_array($result)) {
         if ($count == 0) {
-            echo '{"ID":' . $row[0] . ', "Name":"' . $row[1] . '"}';
+            echo '{"ID":' . $row[0] . ', "name":"' . $row[1] . '"}';
         } else {
-            echo ',{"ID":' . $row[0] . ', "Name":"' . $row[1] . '"}';
+            echo ',{"ID":' . $row[0] . ', "name":"' . $row[1] . '"}';
         }
         $count = $count + 1;
     }
