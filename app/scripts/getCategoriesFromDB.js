@@ -7,7 +7,7 @@ define(['jquery'], function ($) {
             });
             items += "<input class=\"w3-radio\" type=\"radio\" name=\"cat\" value=0> Όλες οι κατηγορίες<br>";
             $.each(data, function (index, item) {
-                items += "<input class=\"w3-radio\" type=\"radio\" name=\"cat\" value=" + item.ID + "> " + item.Name + "<br>";
+                items += "<input class=\"w3-radio\" type=\"radio\" name=\"cat\" value=" + item.ID + "> " + item.name + "<br>";
             });
             $(selection)
                 .html(items);
