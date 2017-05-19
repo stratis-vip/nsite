@@ -1,6 +1,5 @@
-define(['jquery'], function ($) {
+define(['jquery','vbl'], function ($,vbl) {
     function getStartAnartiseis(count) {
-        require(['scripts/variables'], function (vbl) {
             //χτίζω το ερώτημα στη βάση.
             console.log('in getStartAnartiseis...');
             var query = '';
@@ -32,7 +31,6 @@ define(['jquery'], function ($) {
                 },
                 datatype: "json"
             });
-        });
         console.log('leaving getStartAnartiseis!');
     }
     return {

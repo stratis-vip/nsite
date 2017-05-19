@@ -1,7 +1,8 @@
 require.config({
     baseUrl: "app",
     paths: {
-        "jquery": "libs/jquery.min"
+        "jquery": "libs/jquery.min",
+        "vbl": "scripts/variables"
     }
 });
 

@@ -1,13 +1,9 @@
-define(['jquery'], function ($) {
+define(['jquery','vbl'], function ($,vbl) {
     function clickStatistics() {
-        require(['scripts/variables'], function (vbl) {
-            $("#dbStatus")
-                .toggle();
-        });
+            $("#dbStatus").toggle();       
     }
 
     function clickOpenOptions() {
-        require(['scripts/variables'], function (vbl) {
             if ($.trim(($("#titleAllagi")
                     .text())) == "Άνοιγμα Επιλογών") {
                 $("#titleAllagi")
@@ -20,7 +16,6 @@ define(['jquery'], function ($) {
                 $("#mySidebar")
                     .css("display", "none");
             }
-        });
     }
 
     function clickOnHeader() {
@@ -35,11 +30,12 @@ define(['jquery'], function ($) {
     function clickOnSearchButton() {
         $("#searchButton")
             .on("click", function () {
-                require(['jquery', 'scripts/dbinfo', 'scripts/variables'], function ($, info, vbl) {
+                require(['scripts/dbinfo'], function (info) {
                     info.setDbInfo();
                     alert(vbl.searchText);
                 });
                 //δημιουργία ερωτήματος
+
                 //αποστολή ερωτήματος
                 //εμφάνιση αποτελεσμάτων
             });

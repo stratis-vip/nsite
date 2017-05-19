@@ -1,4 +1,4 @@
-define(['jquery','scripts/variables'], function ($,vbl) {
+define(['jquery','vbl'], function ($,vbl) {
     function prepareResults(sqlData) {
         //τα δεδομένα γυρνάνε στη μορφή
         //{"status": 0, 

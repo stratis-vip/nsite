@@ -1,10 +1,8 @@
-define(['jquery'], function ($) {
+define(['jquery','vbl'], function ($,vbl) {
     function getCategoriesFromDB(selection) {
         var items = "";
-        $.getJSON("app/scripts/php/getcat.php", function (data) {
-            require(['scripts/variables'], function (vbl) {
+        $.getJSON("app/scripts/php/getcat.php", function (data) {            
                 vbl.katigories = data;
-            });
             items += "<input class=\"w3-radio\" type=\"radio\" name=\"cat\" value=0> Όλες οι κατηγορίες<br>";
             $.each(data, function (index, item) {
                 items += "<input class=\"w3-radio\" type=\"radio\" name=\"cat\" value=" + item.ID + "> " + item.name + "<br>";

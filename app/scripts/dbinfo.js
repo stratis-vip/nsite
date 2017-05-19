@@ -1,8 +1,7 @@
-define(['jquery'], function ($) {
+define(['jquery','vbl'], function ($,vbl) {
     var finishedCollectInfo = function (collectInfo) {
         return new Promise(
             function (resolve, reject) {
-                require(['scripts/variables'], function (vbl) {
                     var temp = $("#order")
                         .val();
                     switch (temp) {
@@ -21,12 +20,7 @@ define(['jquery'], function ($) {
                         .val()));
                     vbl.setFilter(Number($('#tax')
                         .val()));
-
-                    resolve("leaving..");
-
-                });
-
-
+                    resolve("leaving..");                
             });
 
     };
@@ -35,7 +29,6 @@ define(['jquery'], function ($) {
 
 
     function setDbInfo() {
-        require(['jquery', 'scripts/variables'], function ($, vbl) {
             finishedCollectInfo()
                 .then(function () {
                     var info = "[";
@@ -51,7 +44,6 @@ define(['jquery'], function ($) {
                     $("#curInfo")
                         .text(info);
                 });
-        });
     }
 
 
