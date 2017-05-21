@@ -1,26 +1,33 @@
-define(['jquery','vbl'], function ($,vbl) {
+define(['jquery', 'vbl'], function($, vbl) {
     function clickStatistics() {
-            $("#dbStatus").toggle();       
+        $("#statistics")
+            .on('click', function() {
+
+                $("#dbStatus").toggle();
+            });
     }
 
     function clickOpenOptions() {
-            if ($.trim(($("#titleAllagi")
-                    .text())) == "Άνοιγμα Επιλογών") {
-                $("#titleAllagi")
-                    .html(" Kλείσιμο Eπιλογών");
-                $("#mySidebar")
-                    .css("display", "block");
-            } else {
-                $("#titleAllagi")
-                    .html(" Άνοιγμα Επιλογών");
-                $("#mySidebar")
-                    .css("display", "none");
-            }
+        $("#openButton")
+            .on('click', function() {
+                if ($.trim(($("#titleAllagi")
+                        .text())) == "Άνοιγμα Επιλογών") {
+                    $("#titleAllagi")
+                        .html(" Kλείσιμο Eπιλογών");
+                    $("#mySidebar")
+                        .css("display", "block");
+                } else {
+                    $("#titleAllagi")
+                        .html(" Άνοιγμα Επιλογών");
+                    $("#mySidebar")
+                        .css("display", "none");
+                }
+            });
     }
 
     function clickOnHeader() {
         $(".searchHeader")
-            .on("click", function () {
+            .on("click", function() {
                 $(this)
                     .siblings()
                     .toggle();
@@ -29,8 +36,8 @@ define(['jquery','vbl'], function ($,vbl) {
 
     function clickOnSearchButton() {
         $("#searchButton")
-            .on("click", function () {
-                require(['scripts/dbinfo'], function (info) {
+            .on("click", function() {
+                require(['scripts/dbinfo'], function(info) {
                     info.setDbInfo();
                     alert(vbl.searchText);
                 });
@@ -43,7 +50,7 @@ define(['jquery','vbl'], function ($,vbl) {
 
     function clickOnSearchExactlyButton() {
         $("#searchExactlyButton")
-            .on("click", function () {
+            .on("click", function() {
                 //δημιουργία ερωτήματος
                 //αποστολή ερωτήματος
                 //εμφάνιση αποτελεσμάτων
@@ -52,7 +59,7 @@ define(['jquery','vbl'], function ($,vbl) {
 
     function clickOnSearchByNumberButton() {
         $("#searchByNumberButton")
-            .on("click", function () {
+            .on("click", function() {
                 //δημιουργία ερωτήματος
                 //αποστολή ερωτήματος
                 //εμφάνιση αποτελεσμάτων

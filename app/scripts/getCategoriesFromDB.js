@@ -1,4 +1,4 @@
-define(['jquery','vbl'], function ($,vbl) {
+/*define(['jquery','vbl'], function ($,vbl) {
     function getCategoriesFromDB(selection) {
         var items = "";
         $.getJSON("app/scripts/php/getcat.php", function (data) {            
@@ -17,3 +17,4 @@ define(['jquery','vbl'], function ($,vbl) {
         getCategoriesFromDB: getCategoriesFromDB
     };
 });
+*/

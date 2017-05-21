@@ -1,4 +1,4 @@
-define(['jquery'], function ($) {
+/*define(['jquery'], function ($) {
     function getDatabaseStatus(selection) {
 	    
         var items = "";
@@ -28,3 +28,4 @@ define(['jquery'], function ($) {
         getDatabaseStatus: getDatabaseStatus
     };
 });
+*/

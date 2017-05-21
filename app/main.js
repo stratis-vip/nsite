@@ -2,29 +2,32 @@ require.config({
     baseUrl: "app",
     paths: {
         "jquery": "libs/jquery.min",
-        "vbl": "scripts/variables"
+        "vbl": "scripts/variables",
+        "ui": "scripts/ui",
+        "info": "scripts/dbinfo"
     }
 });
 
-require(['jquery', 'scripts/ui'], function ($, ui) {
+require(['vbl', 'jquery', 'ui', 'info', 'scripts/nVar'], function (vbl, $, ui, info, V) {
 
-    require(['scripts/getCategoriesFromDB'], function (getCategoriesFromDB) {
-        getCategoriesFromDB.getCategoriesFromDB("#category");
-    });
+    /*/   require(['scripts/getCategoriesFromDB'], function (getCategoriesFromDB) {
+    //     getCategoriesFromDB.getCategoriesFromDB("#category");
+    // });
 
-    require(['scripts/getDatabaseStatus'], function (getDatabaseStatus) {
+    require(['scripts/getDatabaseStatus'], function(getDatabaseStatus) {
         getDatabaseStatus.getDatabaseStatus("#dbStatus");
     });
+*/
+    /*	console.log(vbl);
+        $('document')
+            .ready(function () {
+                ui.clickStatistics();
+                ui.clickOnHeader();
+                ui.clickOnSearchButton();
+                ui.clickOpenOptions();
 
-    $("#statistics")
-        .on('click', ui.clickStatistics);
-    ui.clickOnHeader();
-    ui.clickOnSearchButton();
-    $("#openButton")
-        .on('click', ui.clickOpenOptions);
-
-    require(['scripts/dbinfo'], function (info) {
-        info.setDbInfo();
+    //            info.setDbInfo();
+            });
         $("#tax")
             .on("change", function () {
                 info.setDbInfo();
@@ -61,6 +64,11 @@ require(['jquery', 'scripts/ui'], function ($, ui) {
         getStartAnartiseis.getStartAnartiseis(5);
         $('#fisrtButton')
             .on('click', getStartAnartiseis.getStartAnartiseis);
+    	*/
+    console.log(V.someValue + JSON.stringify(V));
+    require(['scripts/test'], function (t) {
+        console.log('going into test...');
+    console.log(V.someValue + JSON.stringify(V));
 
     });
 
