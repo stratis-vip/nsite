@@ -10,52 +10,31 @@ require.config({
 
 require(['vbl', 'jquery', 'ui', 'info', 'scripts/nVar'], function (vbl, $, ui, info, V) {
 
-    /*/   require(['scripts/getCategoriesFromDB'], function (getCategoriesFromDB) {
-    //     getCategoriesFromDB.getCategoriesFromDB("#category");
-    // });
+       require(['scripts/getCategoriesFromDB'], function (getCategoriesFromDB) {
+         getCategoriesFromDB.getCategoriesFromDB("#category");
+     });
 
-    require(['scripts/getDatabaseStatus'], function(getDatabaseStatus) {
+/*    require(['scripts/getDatabaseStatus'], function(getDatabaseStatus) {
         getDatabaseStatus.getDatabaseStatus("#dbStatus");
     });
 */
-    /*	console.log(vbl);
-        $('document')
-            .ready(function () {
-                ui.clickStatistics();
-                ui.clickOnHeader();
-                ui.clickOnSearchButton();
-                ui.clickOpenOptions();
-
-    //            info.setDbInfo();
-            });
-        $("#tax")
-            .on("change", function () {
-                info.setDbInfo();
-                if ($('#tax')
-                    .val() > 0) {
-                    $('#order')
-                        .show();
-                } else {
-                    $('#order')
-                        .hide();
-                }
-
-
-            });
-        $("#order")
-            .on("change", function () {
-                info.setDbInfo();
-            });
-        $('#searchText')
-            .on('focusout', function () {
-                info.setDbInfo();
-            });
-        $('#searchNumberText')
-            .on('focusout', function () {
-                info.setDbInfo();
-            });
-
-        $("#category")
+    //	console.log(vbl);
+    $('document')
+        .ready(function () {
+            ui.clickStatistics();
+            ui.clickOpenOptions();
+            ui.clickOnHeader();
+            ui.clickOnSearchButton();
+            ui.clickOnSearchExactlyButton();
+            ui.clickOnSearchByNumberButton();
+            ui.changeTaxOptions();
+            ui.changeOrderOptions();
+            ui.onFocusOutSearch();
+            ui.onFocusOutSearchNumber();
+            //            info.setDbInfo();
+        });
+    /*
+         $("#category")
             .on("change", function () {
                 info.setDbInfo();
             });
@@ -68,7 +47,7 @@ require(['vbl', 'jquery', 'ui', 'info', 'scripts/nVar'], function (vbl, $, ui, i
     console.log(V.someValue + JSON.stringify(V));
     require(['scripts/test'], function (t) {
         console.log('going into test...');
-    console.log(V.someValue + JSON.stringify(V));
+        console.log(V.someValue + JSON.stringify(V));
 
     });
 
