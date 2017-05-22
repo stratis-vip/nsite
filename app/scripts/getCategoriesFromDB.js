@@ -1,4 +1,4 @@
-define(['jquery', 'vbl', 'ui','info'], function ($, vbl, ui,info) {
+define(['jquery', 'vbl', 'ui', 'info'], function ($, vbl, ui, info) {
     console.log('DEBUG: Entering script app/scripts/getCategoriesFromDB.js');
 
     function getCategoriesFromDB(selection) {
@@ -17,11 +17,9 @@ define(['jquery', 'vbl', 'ui','info'], function ($, vbl, ui,info) {
                     .val([0]);
             })
             .done(function () {
-                console.log("DEBUG: Ajax call to fill categories succeed! This is the point to assign a change value at categories");
+                console.log("DEBUG: Ajax call to fill categories succeed!");
                 ui.changeCategory();
-		    info.setDbInfo();
-		    console.log('DEBUG: katigories='+JSON.stringify(vbl.katigories));
-
+                info.setDbInfo();
             })
             .fail(function () {
                 console.error("DEBUG: Ajax call to fill categories FAILED! ");

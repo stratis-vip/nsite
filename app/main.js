@@ -12,11 +12,11 @@ require.config({
 });
 
 require(['vbl', 'jquery', 'ui', 'info', 'gC', 'gD', 'gS'],
-    function (vbl, $, ui, info, getCategoriesFromDB, getDatabaseStatus, getStartAnartiseis) {
+    function(vbl, $, ui, info, getCategoriesFromDB, getDatabaseStatus, getStartAnartiseis) {
         getCategoriesFromDB.getCategoriesFromDB("#category");
         getDatabaseStatus.getDatabaseStatus("#dbStatus");
         $('document')
-            .ready(function () {
+            .ready(function() {
                 ui.clickStatistics();
                 ui.clickOpenOptions();
                 ui.clickOnHeader();
@@ -28,7 +28,12 @@ require(['vbl', 'jquery', 'ui', 'info', 'gC', 'gD', 'gS'],
                 ui.onFocusOutSearch();
                 ui.onFocusOutSearchNumber();
 
-                getStartAnartiseis.getStartAnartiseis(5);
+                ui.onPressToFirst();
+                ui.onPressToLast();
+                ui.onPressToNext();
+                ui.onPressToPrevious();
+                getStartAnartiseis.getStartAnartiseis(10);
+                ui.initializeNavBar();
 
             });
         /*
@@ -47,6 +52,4 @@ require(['vbl', 'jquery', 'ui', 'info', 'gC', 'gD', 'gS'],
 
     });
 */
-        console.log('DEBUG: vbl=' + JSON.stringify(vbl));
-        console.log('DEBUG: vbl.key=' + vbl.key);
     });

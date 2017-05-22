@@ -7,7 +7,7 @@ if (!$link) {
     echo mysqli_connect_errno() . ',"message":"Αδυναμία Σύνδεσης. Επικοινωνήστε με τον διαχειριστή"}';
     exit;
 } else {
-    echo '0,"message":"Επιτυχής σύνδεση ' . $dbServ . '",';
+    echo '0,"message":"Επιτυχής σύνδεση '.$dbServ.'",';
     mysqli_query($link, "SET NAMES 'utf8'");
     mysqli_select_db($link, 'test');
     echo '"categories":[';
