@@ -1,13 +1,16 @@
 define(['jquery', 'vbl'], function ($, vbl) {
+    console.log('DEBUG: Entering script app/scripts/getStartAnartiseis.js');
+
     function getStartAnartiseis(count) {
         require(['jquery', 'vbl', 'info'], function ($, vbl, info) {
 
             //χτίζω το ερώτημα στη βάση.
             console.log('in getStartAnartiseis...');
             var query = '';
-
+            $("#loader")
+                .show();
             query += 'SELECT keimena.* FROM keimena ';
-		vbl.setKey=0;
+            vbl.setKey = 0;
             if (Number(vbl.key) !== 0) {
                 query += '	WHERE keimena.category = ' + vbl.key;
             }

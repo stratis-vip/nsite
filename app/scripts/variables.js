@@ -1,8 +1,9 @@
 define(['jquery'], function ($) {
-        console.log('...entering variables');
+	console.log('DEBUG: Entering script app/scripts/variables.js');
 
         function vars() {
             var self = this;
+		console.log('DEBUG: Entering function vars() ');
             self.filter = 0;
             self.taxOrder = "ASC";
             self.key = 0;
@@ -53,34 +54,10 @@ define(['jquery'], function ($) {
                 self.query = newQuery;
                 return self.query;
             };
-            self.finishedCollectInfo = function () {
-                console.log('entering collectinfo');
-                return new Promise(
-                    function (resolve, reject) {
-                        var temp = $("#order")
-                            .val();
-                        switch (temp) {
-                        case "1":
-                            self.setTaxOrder("ASC");
-                            break;
-                        case "2":
-                            self.setTaxOrder("DESC");
-                            break;
-                        }
-                        self.setSearchText($('#searchText')
-                            .val());
-                        self.setSearchNumber(Number($('#searchNumberText')
-                            .val()));
-                        self.setKey(Number($('input[name=category]:checked')
-                            .val()));
-                        self.setFilter(Number($('#tax')
-                            .val()));
-                        resolve("leaving..");
-                    });
-            };
+
             self.finishedGetCategoriesFromDB = function getCategoriesFromDB() {
                 return new Promise(function (resolve, reject) {
-                    console.log("entering collectKategreis FromDB");
+			console.log('DEBUG: Entering function finishedGetCategoriesFromDB');
                     var items = "";
                     $.getJSON("app/scripts/php/getcat.php", function (data) {
                         vbl.katigories = data;
@@ -98,7 +75,7 @@ define(['jquery'], function ($) {
             };
             //new
             self.finishedGetDatabaseStatus = function getDatabaseStatus() {
-                console.log('entering getDataBaseStatus');
+                console.log('DEBUG: Entering function getDataBaseStatus');
                 return new Promise(
                     function (resolve, reject) {
 
@@ -130,7 +107,7 @@ define(['jquery'], function ($) {
             };
         }
         //old
-        return vars();
+        return new vars();
     }
 
 );

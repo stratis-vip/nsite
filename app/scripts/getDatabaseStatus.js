@@ -1,6 +1,7 @@
-/*define(['jquery'], function ($) {
+define(['jquery'], function ($) {
+	console.log('DEBUG: Entering script app/scripts/getDatabaseStatus.js');
     function getDatabaseStatus(selection) {
-	    
+	    console.log('DEBUG: Entering function getDatabaseStatus');
         var items = "";
         $.getJSON("app/scripts/php/connect.php", function (data) {
             items += '<p>';
@@ -28,4 +29,4 @@
         getDatabaseStatus: getDatabaseStatus
     };
 });
-*/
+

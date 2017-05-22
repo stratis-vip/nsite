@@ -1,4 +1,6 @@
-define(['jquery', 'vbl'], function ($, vbl) {
+define(['jquery', 'vbl','info'], function ($, vbl,info) {
+    console.log('DEBUG: Entering script app/scripts/ui.js');
+
     function clickStatistics() {
         $("#statistics")
             .on('click', function () {
@@ -31,7 +33,7 @@ define(['jquery', 'vbl'], function ($, vbl) {
         $(".searchHeader")
             .on("click", function () {
                 console.log('DEBUG: Entering clickOnHeader');
-                for (var i = 0, w = Things.length; i < w; i++) {}
+                for (var i = 0, w = this.length; i < w; i++) {}
                 $(this)
                     .siblings()
                     .toggle();
@@ -89,6 +91,13 @@ define(['jquery', 'vbl'], function ($, vbl) {
             });
     }
 
+    function changeCategory() {}
+    $("#category")
+        .on("change", function () {
+            console.log('DEBUG: Entering function changeCategory');
+		info.setDbInfo();
+        });
+
     function changeOrderOptions() {
         $("#order")
             .on("change", function () {
@@ -121,6 +130,7 @@ define(['jquery', 'vbl'], function ($, vbl) {
         clickOnSearchExactlyButton: clickOnSearchExactlyButton,
         clickOnSearchByNumberButton: clickOnSearchByNumberButton,
         changeTaxOptions: changeTaxOptions,
+        changeCategory: changeCategory,
         changeOrderOptions: changeOrderOptions,
         onFocusOutSearch: onFocusOutSearch,
         onFocusOutSearchNumber: onFocusOutSearchNumber
