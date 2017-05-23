@@ -3,6 +3,7 @@ require.config({
     paths: {
         "jquery": "libs/jquery.min",
         "vbl": "scripts/variables",
+	    "bs":"libs/bootstrap.min",
         "ui": "scripts/ui",
         "info": "scripts/dbinfo",
         "gC": "scripts/getCategoriesFromDB",
@@ -11,8 +12,8 @@ require.config({
     }
 });
 
-require(['vbl', 'jquery', 'ui', 'info', 'gC', 'gD', 'gS'],
-    function(vbl, $, ui, info, getCategoriesFromDB, getDatabaseStatus, getStartAnartiseis) {
+require(['vbl', 'jquery', 'ui', 'info', 'gC', 'gD', 'gS','bs'],
+    function(vbl, $, ui, info, getCategoriesFromDB, getDatabaseStatus, getStartAnartiseis,bs) {
         getCategoriesFromDB.getCategoriesFromDB("#category");
         getDatabaseStatus.getDatabaseStatus("#dbStatus");
         $('document')
