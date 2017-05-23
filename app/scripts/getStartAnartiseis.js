@@ -1,4 +1,4 @@
-define(['jquery', 'vbl', 'info'], function($, vbl, info) {
+define(['jquery', 'vbl', 'info'], function ($, vbl, info) {
     console.log('DEBUG: Entering script app/scripts/getStartAnartiseis.js');
 
     function getStartAnartiseis(count) {
@@ -28,12 +28,16 @@ define(['jquery', 'vbl', 'info'], function($, vbl, info) {
             data: {
                 "value": query
             },
-            success: function(data) {
+            success: function (data) {
                 console.log('DEBUG: AJAX returns in getStartAnartiseis');
-                require(['scripts/prepareResults'], function(prepareResults) {
+                require(['scripts/prepareResults'], function (prepareResults) {
                     vbl.setCurrentId(vbl.currentId + 1);
+                    vbl.setBuffer(data);
+//			console.log('DEBUG: vbl.buffer = ' +JSON.stringify(vbl.buffer));
                     prepareResults.prepareResults(data, vbl.currentId);
-                    $("#infoDbRecords").html(' #' + (vbl.currentId + 1) + ' από ' + vbl.bufferSize + ' ');
+
+                    $("#infoDbRecords")
+                        .html(' #' + (vbl.currentId + 1) + ' από ' + vbl.bufferSize + ' ');
 
                 });
             },

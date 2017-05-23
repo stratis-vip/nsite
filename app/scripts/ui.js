@@ -1,9 +1,9 @@
-define(['jquery', 'vbl', 'info'], function($, vbl, info) {
+define(['jquery', 'vbl', 'info'], function ($, vbl, info) {
     console.log('DEBUG: Entering script app/scripts/ui.js');
 
     function clickStatistics() {
         $("#statistics")
-            .on('click', function() {
+            .on('click', function () {
                 console.log("DEBUG: in clickStatistics");
                 $("#dbStatus")
                     .toggle();
@@ -12,7 +12,7 @@ define(['jquery', 'vbl', 'info'], function($, vbl, info) {
 
     function clickOpenOptions() {
         $("#openButton")
-            .on('click', function() {
+            .on('click', function () {
                 console.log('DEBUG: Entering clickOpenOptions');
                 if ($.trim(($("#titleAllagi")
                         .text())) == "Άνοιγμα Επιλογών") {
@@ -31,7 +31,7 @@ define(['jquery', 'vbl', 'info'], function($, vbl, info) {
 
     function clickOnHeader() {
         $(".searchHeader")
-            .on("click", function() {
+            .on("click", function () {
                 console.log('DEBUG: Entering clickOnHeader');
                 for (var i = 0, w = this.length; i < w; i++) {}
                 $(this)
@@ -42,22 +42,14 @@ define(['jquery', 'vbl', 'info'], function($, vbl, info) {
 
     function clickOnSearchButton() {
         $("#searchButton")
-            .on("click", function() {
+            .on("click", function () {
                 console.log("DEBUG: Entering clickOnSearchButton");
-                // require(['scripts/dbinfo'], function (info) {
-                //   info.setDbInfo();
-                // alert(vbl.searchText);
-                // });
-                //δημιουργία ερωτήματος
-
-                //αποστολή ερωτήματος
-                //εμφάνιση αποτελεσμάτων
             });
     }
 
     function clickOnSearchExactlyButton() {
         $("#searchExactlyButton")
-            .on("click", function() {
+            .on("click", function () {
                 console.log("DEBUG: Entering clickOnSearchExactlyButton");
                 //δημιουργία ερωτήματος
                 //αποστολή ερωτήματος
@@ -67,7 +59,7 @@ define(['jquery', 'vbl', 'info'], function($, vbl, info) {
 
     function clickOnSearchByNumberButton() {
         $("#searchByNumberButton")
-            .on("click", function() {
+            .on("click", function () {
                 console.log("DEBUG: Entering clickOnSearchByNumberButton");
                 //δημιουργία ερωτήματος
                 //αποστολή ερωτήματος
@@ -77,7 +69,7 @@ define(['jquery', 'vbl', 'info'], function($, vbl, info) {
 
     function changeTaxOptions() {
         $("#tax")
-            .on("change", function() {
+            .on("change", function () {
                 console.log("DEBUG: Entering changeTaxOptions");
                 //   info.setDbInfo();
                 if ($('#tax')
@@ -93,7 +85,7 @@ define(['jquery', 'vbl', 'info'], function($, vbl, info) {
 
     function changeCategory() {
         $("#category")
-            .on("change", function() {
+            .on("change", function () {
                 console.log('DEBUG: Entering function changeCategory');
                 info.setDbInfo();
             });
@@ -101,7 +93,7 @@ define(['jquery', 'vbl', 'info'], function($, vbl, info) {
 
     function changeOrderOptions() {
         $("#order")
-            .on("change", function() {
+            .on("change", function () {
                 console.log("DEBUG: Entering changeOrderOptions");
                 // info.setDbInfo();
             });
@@ -109,7 +101,7 @@ define(['jquery', 'vbl', 'info'], function($, vbl, info) {
 
     function onFocusOutSearch() {
         $("#searchText")
-            .on('focusout', function() {
+            .on('focusout', function () {
                 console.log("DEBUG: Entering onFocusOutSearch");
                 //        info.setDbInfo();
             });
@@ -117,80 +109,94 @@ define(['jquery', 'vbl', 'info'], function($, vbl, info) {
 
     function onFocusOutSearchNumber() {
         $("#searchNumberText")
-            .on('focusout', function() {
+            .on('focusout', function () {
                 console.log("DEBUG: Entering onFocusOutSearchNumber");
                 //        info.setDbInfo();
             });
     }
 
     function onPressToFirst() {
-
-        $("#firstButton").on("click", function() {
+        $("#firstButton")
+            .on("click", function () {
                 console.log("DEBUG: in function onPressToStart");
                 //function code
                 vbl.currentId = 0;
                 initializeNavBar();
-            })
-            //το πλήκτρο πήγαινε στην αρχή
+            });
+        //το πλήκτρο πήγαινε στην αρχή
     }
 
     function onPressToLast() {
-
-        $("#lastButton").on("click", function() {
-            console.log("DEBUG: in function onPressToLast");
-            vbl.currentId = vbl.bufferSize;
-            initializeNavBar();
-            //function code
-        })
-
+        $("#lastButton")
+            .on("click", function () {
+                console.log("DEBUG: in function onPressToLast");
+                vbl.currentId = vbl.bufferSize - 1;
+                initializeNavBar();
+                //function code
+            });
         //το πλήκτρο πήγαινε στην αρχή
     }
 
     function onPressToNext() {
-
         //το πλήκτρο πήγαινε στην αρχή
-        $("#nextButton").on("click", function() {
-            console.log("DEBUG: in function onPressNext");
-            vbl.currentId++;
-            initializeNavBar();
-            //function code
-        })
-
+        $("#nextButton")
+            .on("click", function () {
+                console.log("DEBUG: in function onPressNext");
+                vbl.currentId++;
+                initializeNavBar();
+                //function code
+            });
     }
 
     function onPressToPrevious() {
-
         //το πλήκτρο πήγαινε στην αρχή
-        $("#prevButton").on("click", function() {
-            console.log("DEBUG: in function onPressToPrevous");
-            vbl.currentId--;
-            initializeNavBar();
-            //function code
-        })
-
+        $("#prevButton")
+            .on("click", function () {
+                console.log("DEBUG: in function onPressToPrevous");
+                vbl.currentId--;
+                initializeNavBar();
+                //function code
+            });
     }
 
     function initializeNavBar() {
         console.log("DEBUG: in function initializeNavBar");
         if (vbl.currentId + 1 > 1) {
-            $("#prevButton").prop('disabled', false);
-            $("#firstButton").prop('disabled', false);
-
+            $("#prevButton")
+                .prop('disabled', false);
+            $("#firstButton")
+                .prop('disabled', false);
         } else {
-            $("#prevButton").prop('disabled', true);
-            $("#firstButton").prop('disabled', true);
+            $("#prevButton")
+                .prop('disabled', true);
+            $("#firstButton")
+                .prop('disabled', true);
         }
         if (vbl.currentId < vbl.bufferSize - 1) {
-            $("#nextButton").prop('disabled', false);
-            $("#lastButton").prop('disabled', false);
-
+            $("#nextButton")
+                .prop('disabled', false);
+            $("#lastButton")
+                .prop('disabled', false);
         } else {
-            $("#nextButton").prop('disabled', true);
-            $("#lastButton").prop('disabled', true);
+            $("#nextButton")
+                .prop('disabled', true);
+            $("#lastButton")
+                .prop('disabled', true);
         }
+        $("#infoDbRecords")
+            .html(' #' + (vbl.currentId + 1) + ' από ' + vbl.bufferSize + ' ');
+        navigate(vbl.currentId);
+    }
 
-        $("#infoDbRecords").html(' #' + (vbl.currentId + 1) + ' από ' + vbl.bufferSize + ' ');
-
+    function navigate(record) {
+        require(['scripts/prepareResults'], function (prepR) {
+            console.log('DEBUG: Entering function navigate');
+            if (typeof vbl.buffer.length !== 'undefined') {
+                prepR.prepareResults(vbl.buffer, record);
+            } else {
+                console.log('DEBUG: Navigate disabled');
+            }
+        });
     }
 
     return {
@@ -208,7 +214,6 @@ define(['jquery', 'vbl', 'info'], function($, vbl, info) {
         onPressToFirst: onPressToFirst,
         onPressToLast: onPressToLast,
         onPressToNext: onPressToNext,
-        onPressToLast: onPressToLast,
         onPressToPrevious: onPressToPrevious,
         initializeNavBar: initializeNavBar
     };
