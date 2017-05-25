@@ -6,7 +6,6 @@
     <meta name="viewport" content="device-width, initial-scale=1">
     <title>Κείμενα Χριστοδούλου</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles/mine/theme.css">
     <link href="styles/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -22,11 +21,11 @@
     </header>
 
     <!-- εδω θα εμφανιζονται τα στατιστικα'της βασης δεδομενων -->
-    <div id="statistics" class="w3-bar w3-left w3-mobile w3-large w3-theme-l2 w3-xlarge" style="padding-left:20px;cursor:pointer"><i class="fa">&#xf1fe;</i> Στατιστικά</div>
+    <div id="statistics" class="w3-bar w3-left w3-mobile w3-large w3-theme-l2 w3-xlarge" style="padding-left:20px;cursor:pointer"><span class="glyphicon glyphicon-stats"></span> Στατιστικά</div>
     <div class="w3-bar w3-theme-l4">
         <div id="dbStatus" class="w3-center w3-card  w3-large" style="display:none;width:90%;margin:auto">Εδώ θα εμφανίσω σε λίγο τα στατιστικά</div>
     </div>
-    <div id="openButton" class="w3-bar w3-left w3-theme-l3 w3-mobile w3-xlarge" style="padding-left:20px;cursor:pointer"><i class="fa fa-cog "></i><span id="titleAllagi"> Άνοιγμα Επιλογών</span></div>
+    <div id="openButton" class="w3-bar w3-left w3-theme-l3 w3-mobile w3-xlarge" style="padding-left:20px;cursor:pointer"><span class="glyphicon glyphicon-wrench"></span><span id="titleAllagi"> Άνοιγμα Επιλογών</span></div>
 
     <div class="w3-bar w3-theme-l4" style="display:none;z-index:4" id="mySidebar">
         <div class="w3-container w3-text-theme">
@@ -97,19 +96,19 @@
     <!-- εδω θα εμφανιζονται οι απαντησεις  -->
     <div id="apantiseis" class="w3-center w3-theme-l4">
         <ul class="pagination" style="margin: 6px 0px -10px 0px;">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">Προηγούμενη</a></li>
             <li class="page-item"><a class="page-link" href="#">1</a></li>
             <li class="page-item"><a class="page-link" href="#">2</a></li>
             <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            <li class="page-item"><a class="page-link" href="#">Επόμενη</a></li>
         </ul>
 
         <div id="navBar" style="margin-top: 7px;">
-            <button id="firstButton" class="w3-button"> <i style="font-size:24px" class="fa">&#xf049;</i></button>
-            <button id="prevButton" class="w3-button"> <i style="font-size:24px" class="fa">&#xf048;</i></button>
+            <button id="firstButton" class="w3-button"><span style="font-size:24px" class="glyphicon glyphicon-fast-backward"></span></button>
+	    <button id="prevButton" class="w3-button"><span style="font-size:24px" class="glyphicon glyphicon-step-backward"></span></button>
             <i><span id="infoDbRecords"> από τόσες </span></i>
-            <button id="nextButton" class="w3-button"> <i style="font-size:24px" class="fa">&#xf051;</i></button>
-            <button id="lastButton" class="w3-button"> <i style="font-size:24px" class="fa">&#xf050;</i></button>
+	    <button id="nextButton" class="w3-button"> <span style="font-size:24px" class="glyphicon glyphicon-step-forward"></span></button>
+            <button id="lastButton" class="w3-button"> <span style="font-size:24px" class="glyphicon glyphicon-step-forward"></span></button>
             <div id="curInfo" style="font-style:italic"></div>
             <div id="loader"><img src="images/ajax-loader.gif" height="42" alt="...φορτώνει..."></div>
 
