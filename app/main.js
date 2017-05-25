@@ -3,21 +3,21 @@ require.config({
     paths: {
         "jquery": "libs/jquery.min",
         "vbl": "scripts/variables",
-	    "bs":"libs/bootstrap.min",
+        "bs": "libs/bootstrap.min",
         "ui": "scripts/ui",
         "info": "scripts/dbinfo",
         "gC": "scripts/getCategoriesFromDB",
         "gD": "scripts/getDatabaseStatus",
-        "gS": "scripts/getStartAnartiseis"
+        "gA": "scripts/getAnartiseis"
     }
 });
 
-require(['vbl', 'jquery', 'ui', 'info', 'gC', 'gD', 'gS','bs'],
-    function(vbl, $, ui, info, getCategoriesFromDB, getDatabaseStatus, getStartAnartiseis,bs) {
+require(['vbl', 'jquery', 'ui', 'info', 'gC', 'gD', 'gA', 'bs'],
+    function (vbl, $, ui, info, getCategoriesFromDB, getDatabaseStatus, getAnartiseis, bs) {
         getCategoriesFromDB.getCategoriesFromDB("#category");
         getDatabaseStatus.getDatabaseStatus("#dbStatus");
         $('document')
-            .ready(function() {
+            .ready(function () {
                 ui.clickStatistics();
                 ui.clickOpenOptions();
                 ui.clickOnHeader();
@@ -33,7 +33,7 @@ require(['vbl', 'jquery', 'ui', 'info', 'gC', 'gD', 'gS','bs'],
                 ui.onPressToLast();
                 ui.onPressToNext();
                 ui.onPressToPrevious();
-                getStartAnartiseis.getStartAnartiseis(10);
+                getAnartiseis.getAnartiseis(10,0);
                 ui.initializeNavBar();
 
             });
