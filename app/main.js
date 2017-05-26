@@ -8,12 +8,13 @@ require.config({
         "info": "scripts/dbinfo",
         "gC": "scripts/getCategoriesFromDB",
         "gD": "scripts/getDatabaseStatus",
-        "gA": "scripts/getAnartiseis"
+        "gA": "scripts/getAnartiseis",
+        "cQ": "scripts/createQuery"
     }
 });
 
-require(['vbl', 'jquery', 'ui', 'info', 'gC', 'gD', 'gA', 'bs'],
-    function (vbl, $, ui, info, getCategoriesFromDB, getDatabaseStatus, getAnartiseis, bs) {
+require(['vbl', 'jquery', 'ui', 'info', 'gC', 'gD', 'gA', 'bs', 'cQ'],
+    function (vbl, $, ui, info, getCategoriesFromDB, getDatabaseStatus, getAnartiseis, bs, cQ) {
         getCategoriesFromDB.getCategoriesFromDB("#category");
         getDatabaseStatus.getDatabaseStatus("#dbStatus");
         $('document')
@@ -33,9 +34,10 @@ require(['vbl', 'jquery', 'ui', 'info', 'gC', 'gD', 'gA', 'bs'],
                 ui.onPressToLast();
                 ui.onPressToNext();
                 ui.onPressToPrevious();
-                getAnartiseis.getAnartiseis(10,0);
+                getAnartiseis.getAnartiseis(10, 0);
                 ui.initializeNavBar();
-
+               info.collectInfo()
+                    .then($("#forDebug").text(cQ.countPostsFromJSONQuery(cQ.createQueryJSON())));
             });
         /*
          $("#category")

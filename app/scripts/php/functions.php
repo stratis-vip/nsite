@@ -1,4 +1,7 @@
 <?php
+define('GET_RESULTS',0);
+define('COUNT_RESULTS',1);
+
 function makeJsonArray($keimeno)
 {
     $apotelesma          = explode("\r\n", $keimeno);

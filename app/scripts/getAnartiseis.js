@@ -29,7 +29,7 @@ define(['jquery', 'vbl', 'info'], function ($, vbl, info) {
             type: "POST",
             url: "app/scripts/php/getTheResults.php",
             data: {
-                "value": query
+                "value": query,"typeofquery":0
             },
             success: function (data) {
                 console.log('DEBUG: AJAX returns in getStartAnartiseis');
