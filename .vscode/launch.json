@@ -13,8 +13,15 @@
             "type": "chrome",
             "request": "attach",
             "name": "Attach to Chrome",
-            "port": 9222,
+            "port": 9000,
             "webRoot": "${workspaceRoot}"
+        },
+        {
+            "type": "php",
+            "request": "launch",
+
+            "port": 9000,
+            "name": "Listen for Xdebug"
         }
     ]
 }
