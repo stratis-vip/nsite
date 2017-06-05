@@ -1,9 +1,13 @@
 define(['jquery', 'vbl'], function ($, vbl) {
-    console.log('DEBUG: Entering script app/scripts/createQuery.js');
+    if (vbl.debug) {
+        console.log('DEBUG: Entering script app/scripts/createQuery.js');
+    }
 
     function createQuery(count, offset) {
         //χτίζω το ερώτημα στη βάση.
-        console.log('DEBUG: in createQuery...');
+        if (vbl.debug) {
+            console.log('DEBUG: in createQuery...');
+        }
         var query = "";
         var queryJSON = {};
         query += 'SELECT keimena.* FROM keimena ';
@@ -16,7 +20,7 @@ define(['jquery', 'vbl'], function ($, vbl) {
         if (Number(vbl.filter) !== 0) {
             if (Number(vbl.filter) === 1) {
                 query += '	ORDER BY keimena.id ' + vbl.taxOrder;
-                queryJSON.order = "keimena.imnia_auth" + vbl.taxOrder;
+                queryJSON.order = "keimena.keimena.id" + vbl.taxOrder;
 
             } else {
                 query += '	ORDER BY keimena.imnia_auth ' + vbl.taxOrder;
@@ -31,14 +35,18 @@ define(['jquery', 'vbl'], function ($, vbl) {
             query += ' OFFSET ' + offset;
 
         }
-        console.log('DEBUG: query to database= ' + query);
-        console.log('DEBUG: queryJSON=' + JSON.stringify(queryJSON));
+        if (vbl.debug) {
+            console.log('DEBUG: query to database= ' + query);
+            console.log('DEBUG: queryJSON=' + JSON.stringify(queryJSON));
+        }
         return query;
     }
 
     function createQueryJSON(count, offset) {
         //χτίζω το ερώτημα στη βάση.
-        console.log('DEBUG: in createJSONQuery...');
+        if (vbl.debug) {
+            console.log('DEBUG: |05| in createJSONQuery...');
+        }
         var queryJSON = {};
         queryJSON.select = "keimena.*";
         queryJSON.from = "keimena";
@@ -53,7 +61,7 @@ define(['jquery', 'vbl'], function ($, vbl) {
         queryJSON.order = "";
         if (Number(vbl.filter) !== 0) {
             if (Number(vbl.filter) === 1) {
-                queryJSON.order = "keimena.imnia_auth" + vbl.taxOrder;
+                queryJSON.order = "keimena.imnia_auth " + vbl.taxOrder;
 
             } else {
                 queryJSONi.order = "keimena.imnia_auth " + vbl.taxOrder;
@@ -69,6 +77,7 @@ define(['jquery', 'vbl'], function ($, vbl) {
         }
         queryJSON.limit = count;
         queryJSON.offset = offset;
+	    if (vbl.debug){console.log('DEBUG:|05|  Exiting createJSONQuery ');}
         return queryJSON;
     }
 
@@ -119,17 +128,21 @@ define(['jquery', 'vbl'], function ($, vbl) {
 
 
     function executeQuery(query) {
-	    var tipos=1;
+        var tipos = 1;
         $.ajax({
             type: "POST",
             url: "app/scripts/php/getTheResults.php",
-            data: { typeofquery:1, value: query },
+            data: {
+                typeofquery: 1,
+                value: query
+            },
             success: function (data) {
-                console.log('DEBUG: AJAX returns in getStartAnartiseis');
+                if (vbl.debug) {
+                    console.log('DEBUG: AJAX returns in getStartAnartiseis');
+                }
                 require(['scripts/prepareResults'], function (prepareResults) {
                     vbl.setCurrentId(vbl.currentId + 1);
                     vbl.setBuffer(data);
-                    console.log('DEBUG: vbl.buffer = ' + JSON.stringify(vbl.buffer));
                     prepareResults.prepareResults(data, vbl.currentId);
 
                     $("#infoDbRecords")
@@ -138,9 +151,14 @@ define(['jquery', 'vbl'], function ($, vbl) {
             },
             datatype: "json"
         });
-        console.log('DEBUG: leaving getStartAnartiseis!');
+        if (vbl.debug) {
+            console.log('DEBUG: leaving getStartAnartiseis!');
+        }
     }
 
+    if (vbl.debug) {
+        console.log('DEBUG: Exiting script app/scripts/createQuery.js');
+    }
     return {
         createQuery: createQuery,
         createQueryJSON: createQueryJSON,

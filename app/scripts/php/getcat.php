@@ -1,19 +1,23 @@
 <?php
 require("class_lib.php");
-$link = mysqli_connect($dbServ, $dbUser, $dbPass, $dbDbase);
-mysqli_query($link, 'set names UTF8');
+// $link = new mysqli($dbServ, $dbUser, $dbPass, $dbDbase);
+// $link->query('set names UTF8');
+$conn = new PDO("mysql:host=$dbServ;dbname=$dbDbase", $dbUser, $dbPass,$opt);
+
+
 echo "[";
 $count = 0;
-if ($result = mysqli_query($link, "SELECT * FROM `keimena_cat` order by `ID`")) {
-    while ($row = mysqli_fetch_array($result)) {
+ 
+if ($result = $conn->query("SELECT id,description FROM `keimena_cat` order by `ID`")) {
+    while ($row = $result->fetch()) {
         if ($count == 0) {
-            echo '{"ID":' . $row[0] . ', "name":"' . $row[1] . '"}';
+            echo '{"id":' . $row['id'] . ', "name":"' . $row['description'] . '"}';
         } else {
-            echo ',{"ID":' . $row[0] . ', "name":"' . $row[1] . '"}';
+            echo ',{"id":' . $row['id'] . ', "name":"' . $row['description'] . '"}';
         }
         $count = $count + 1;
     }
 }
 echo "]";
-mysqli_free_result($result);
-mysqli_close($link);
+$result=null;
+$conn=null;

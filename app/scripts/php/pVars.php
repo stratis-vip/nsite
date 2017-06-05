@@ -1,8 +1,16 @@
 <?php
 include("class_lib.php");
 
-$dbServ1 = "test";
-$link = new mysqli($dbServ,$dbUser, $dbPass, $dbDbase);
+
+try
+{
+    $masterConnection = new PDO("mysql:host=$dbServ;dbname=$dbDbase", $dbUser, $dbPass);
+}
+    catch (PDOException $e) {
+
+}
+
+
 echo '{ "status":';
 
 if (!$link) {

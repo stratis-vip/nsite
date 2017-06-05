@@ -1,0 +1,176 @@
+<?php
+
+$htServ  = 
+$dbUser  =
+//$dbServ=
+$dbServ  = 
+$dbPass  =
+$dbDbase =
+$opt = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => true
+];   
+
+
+class keimeno
+{
+    public $id;
+    public function __construct($id)
+    {
+        $this->id = $id;
+    }
+    
+    public function set_id($new_id)
+    {
+        $this->id = $new_id;
+    }
+    
+    public function get_id()
+    {
+        return $this->id;
+    }
+}
+
+class config
+{
+    public $hostname;
+    public $username;
+    public $password;
+    public $database;
+    public $prefix;
+    public $connector;
+    
+    public function __construct($hostname = null, $username = null, $password = null, $database = null)
+    {
+        $this->hostname = !empty($hostname) ? $hostname : "";
+        $this->username = !empty($username) ? $username : "";
+        $this->password = !empty($password) ? $password : "";
+        $this->database = !empty($database) ? $database : "";
+    }
+    
+    public function __destruct()
+    {
+    }
+}
+
+class db extends PDO
+{
+    private $connection;
+    private $lastQuery;
+    private $error;
+    private $dbServ;
+    private $dbBase;
+    private $dbUser;
+    private $dbPass;
+    private $preparedQueries=[];
+    private $charset = 'utf8';
+    private $dsn;
+    private $opt;
+    private $stmt;
+
+    public function GetPreparedQueries()
+    {
+        return $this->preparedQueries;
+    }
+    
+    /* H συνάρτηση αυτή κλείνει όλες τις προετοιμασμένες ερωτήσεις*/
+    function DestroyPreparedQueries()
+    {
+       foreach ($this->preparedQueries as  &$value) {
+           $value=null; 
+       }
+    }
+    
+    public function __construct()
+    {
+        $this->error=[];
+        $this->dbServ=$GLOBALS['dbServ'];
+        $this->dbBase=$GLOBALS['dbDbase'];
+        $this->dbUser=$GLOBALS['dbUser'];
+        $this->dbPass=$GLOBALS['dbPass'];    
+        $this->stmt=null;
+        $this->dsn = "mysql:host=$this->dbServ;dbname=$this->dbBase;charset=$this->charset"; 
+        $this->opt = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => true
+];   
+	$this->connection=new PDO($this->dsn,$this->dbUser,$this->dbPass,$this->opt);
+    }
+    
+    public function __destruct()
+    {
+        $this->DestroyPreparedQueries();
+        $this->connection=null;        
+    }
+    
+    public function GetError()
+    {
+        return $this->error;
+    }
+
+    public function OpenConnection()
+    {
+        try {
+          $this->connection = new PDO($this->dsn, $this->dbUser, $this->dbPass, $this->opt);
+          $this->error=null;
+          return $this->connection;
+        }catch (PDOException $e) {
+            $this->error=$e->getMessage();
+            return null;
+        }
+    }
+
+    public function PrepareQuery($name, $query)
+    {
+        $query='SELECT `*` FROM `keimena` WHERE keimena.category= :cat ORDER BY :ord :ascOrDesc LIMIT :limitValue OFFSET :offsetValue';//? OFFSET ?' ;
+        if ($this->preparedQueries[$name] = $this->connection->prepare($query))
+        {       
+           $this->preparedQueries[$name]=&$this->preparedQueries[$name];
+        }
+
+    }
+
+    public function ExecuteQuery($nameOfQuery,$arrayOfParams)
+    {
+        if (array_key_exists($nameOfQuery, $this->preparedQueries)) {
+            $pdoTMP=$this->preparedQueries[$nameOfQuery];
+            $pdoTMP->bindParam(':cat', $arrayOfParams[0]);
+            $pdoTMP->bindParam(':ord', $arrayOfParams[1]);
+            $pdoTMP->bindParam(':ascOrDesc', $arrayOfParams[2]);
+            $pdoTMP->bindParam(':limitValue', $arrayOfParams[3], PDO::PARAM_INT);
+            $pdoTMP->bindParam(':offsetValue', $arrayOfParams[4], PDO::PARAM_INT);
+            if ($pdoTMP->execute())
+            { return $pdoTMP;}
+        }
+        else
+        {
+            $this->error[]="Δεν υπάρχει το ερώτημα με τίτλο $nameOfQuery";
+            return false;
+        }
+    }
+}
+
+// $db1=new db($dbServ, $dbDbase, $dbUser, $dbPass);
+// if ($db2->OpenConnection())
+// { 
+//     echo "all ok";
+//     $db1->PrepareQuery("keimena","");
+//     $tmpPDO= $db1->ExecuteQuery("keimena",[1,"keimena.category","ASC",1,62]);
+//     if (!$tmpPDO)
+//     {
+//         print_r( $db1->GetError());
+//     }
+//     else
+//     {
+//         while ($result=$tmpPDO->fetch())
+//         {
+//             print_r($result);
+//         }
+//     }
+//     }else {
+//         echo $db1->GetError();
+//         } 
+//
+//

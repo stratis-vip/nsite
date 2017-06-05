@@ -21,13 +21,13 @@
     </header>
 
     <!-- εδω θα εμφανιζονται τα στατιστικα'της βασης δεδομενων -->
-    <div id="statistics" class="w3-bar w3-left w3-mobile w3-large w3-theme-l2 w3-xlarge" style="padding-left:20px;cursor:pointer"><span class="glyphicon glyphicon-stats"></span> Στατιστικά</div>
-    <div class="w3-bar w3-theme-l4">
-        <div id="dbStatus" class="w3-center w3-card  w3-large" style="display:none;width:90%;margin:auto">Εδώ θα εμφανίσω σε λίγο τα στατιστικά</div>
+    <div id="statistics" class="w3-bar w3-left w3-mobile w3-large w3-theme-l1 w3-xlarge" style="padding-left:20px;cursor:pointer"><span class="glyphicon glyphicon-stats"></span> Στατιστικά</div>
+    <div class="w3-bar w3-theme-l5">
+        <div id="dbStatus" class="w3-center w3-card  w3-large" style="display:none;width:90%;margin:auto">Φορτώνονται στατιστικά...</div>
     </div>
-    <div id="openButton" class="w3-bar w3-left w3-theme-l3 w3-mobile w3-xlarge" style="padding-left:20px;cursor:pointer"><span class="glyphicon glyphicon-wrench"></span><span id="titleAllagi"> Άνοιγμα Επιλογών</span></div>
+    <div id="openButton" class="w3-bar w3-left w3-theme-l2 w3-mobile w3-xlarge" style="padding-left:20px;cursor:pointer"><span class="glyphicon glyphicon-wrench"></span><span id="titleAllagi"> Άνοιγμα Επιλογών</span></div>
 
-    <div class="w3-bar w3-theme-l4" style="display:none;z-index:4" id="mySidebar">
+    <div class="w3-bar w3-theme-l5" style="display:none;z-index:4" id="mySidebar">
         <div class="w3-container w3-text-theme">
             <p class="margin-20top">&nbsp;</p>
 
@@ -39,6 +39,7 @@
                 <div class="w3-container">
                     <form id="category" class="w3-form " action="">
                         <!-- getCategoriesFromDB -->
+                        <p>Φορτώνονται οι κατηγορίες από την Βάση Δεδομένων...</p>
                     </form>
                     <p />
                 </div>
@@ -65,8 +66,16 @@
                     <p />
                 </div>
             </div>
-            <p class="margin-20top">&nbsp;</p>
+            <p class="w3-center">
+                <button id="setOptions" class="w3-btn w3-black w3-mobile w3-round-xxlarge" style="width:50%;margin-top:10px">Εφαρμογή των Επιλογών</button></p>
+        </div>
+    </div>
+    <div id="openSearchButton" class="w3-bar w3-left w3-theme-l3 w3-mobile w3-xlarge" style="padding-left:20px;cursor:pointer"><span class="glyphicon glyphicon-search"></span><span id="titleSearch"> Άνοιγμα Αναζήτησης</span></div>
 
+
+    <div class="w3-bar w3-theme-l5" style="display:none;z-index:4" id="mySearchBar">
+        <div class="w3-container w3-text-theme">
+            <p class="margin-20top">&nbsp;</p>
             <!--εδώ γίνεται η εισαγωγή των κριτηρίων αναζήτησης-->
             <div class="margin5top w3-card-4 " style="width:90%;margin:auto">
                 <header class="w3-container w3-theme-d5 searchHeader">
@@ -93,7 +102,7 @@
         </div>
     </div>
 
-    <!-- εδω θα εμφανιζονται οι απαντησεις  -->
+    <!-- Εδώ θα μπει η σελιδοποίηση -->
     <div id="apantiseis" class="w3-center w3-theme-l4">
         <ul class="pagination" style="margin: 6px 0px -10px 0px;">
             <li class="page-item"><a class="page-link" href="#">Προηγούμενη</a></li>
@@ -103,17 +112,20 @@
             <li class="page-item"><a class="page-link" href="#">Επόμενη</a></li>
         </ul>
 
+        <!-- Εδώ θα μπει η πλοήγηση -->
         <div id="navBar" style="margin-top: 7px;">
             <button id="firstButton" class="w3-button"><span style="font-size:24px" class="glyphicon glyphicon-fast-backward"></span></button>
-	    <button id="prevButton" class="w3-button"><span style="font-size:24px" class="glyphicon glyphicon-step-backward"></span></button>
+            <button id="prevButton" class="w3-button"><span style="font-size:24px" class="glyphicon glyphicon-step-backward"></span></button>
             <i><span id="infoDbRecords"> από τόσες </span></i>
-	    <button id="nextButton" class="w3-button"> <span style="font-size:24px" class="glyphicon glyphicon-step-forward"></span></button>
+            <button id="nextButton" class="w3-button"> <span style="font-size:24px" class="glyphicon glyphicon-step-forward"></span></button>
             <button id="lastButton" class="w3-button"> <span style="font-size:24px" class="glyphicon glyphicon-step-forward"></span></button>
             <div id="curInfo" style="font-style:italic"></div>
             <div id="loader"><img src="images/ajax-loader.gif" height="42" alt="...φορτώνει..."></div>
 
         </div>
-            <div id="database">            </div>
+
+        <!-- εδω θα εμφανιζονται οι απαντησεις  -->
+        <div id="database"> </div>
     </div>
     <div id="forDebug"></div>
 

@@ -1,9 +1,13 @@
 define(['jquery', 'vbl', 'info'], function ($, vbl, info) {
-    console.log('DEBUG: Entering script app/scripts/getAnartiseis.js');
+    if (vbl.debug) {
+        console.log('DEBUG: Entering script app/scripts/getAnartiseis.js');
+    }
 
     function getAnartiseis(count, offset) {
         //χτίζω το ερώτημα στη βάση.
-        console.log('DEBUG: in getAnartiseis...');
+        if (vbl.debug) {
+            console.log('DEBUG: |02| in getAnartiseis...');
+        }
         var query = '';
         $("#loader")
             .show();
@@ -24,19 +28,23 @@ define(['jquery', 'vbl', 'info'], function ($, vbl, info) {
         if (offset > 0) {
             query += ' OFFSET ' + offset;
         }
-        console.log('DEBUG: query to database= ' + query);
+        if (vbl.debug) {
+            console.log('DEBUG: |02| query to database= ' + query);
+        }
         $.ajax({
             type: "POST",
             url: "app/scripts/php/getTheResults.php",
             data: {
-                "value": query,"typeofquery":0
+                "value": query,
+                "typeofquery": 0
             },
             success: function (data) {
-                console.log('DEBUG: AJAX returns in getStartAnartiseis');
+                if (vbl.debug) {
+                    console.log('DEBUG: |02| AJAX returns in getStartAnartiseis');
+                }
                 require(['scripts/prepareResults'], function (prepareResults) {
                     vbl.setCurrentId(vbl.currentId + 1);
                     vbl.setBuffer(data);
-                    console.log('DEBUG: vbl.buffer = ' +JSON.stringify(vbl.buffer));
                     prepareResults.prepareResults(data, vbl.currentId);
 
                     $("#infoDbRecords")
@@ -45,7 +53,9 @@ define(['jquery', 'vbl', 'info'], function ($, vbl, info) {
             },
             datatype: "json"
         });
-        console.log('DEBUG: leaving getStartAnartiseis!');
+        if (vbl.debug) {
+            console.log('DEBUG: leaving getStartAnartiseis!');
+        }
     }
     return {
         getAnartiseis: getAnartiseis
