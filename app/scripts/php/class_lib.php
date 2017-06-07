@@ -1,5 +1,5 @@
 <?php
-
+use PDO;
 $htServ  = "http://newdbase.texnopraksis.com/";
 $dbUser  = "dbaseuser";
 //$dbServ="db22.papaki.gr";

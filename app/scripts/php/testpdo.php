@@ -2,9 +2,9 @@
 include("class_lib.php");
 
 try {
-    $conn = new PDO("mysql:host=$dbServ;dbname=$dbDbase", $dbUser, $dbPass);
+	$conn = new PDO("mysql:host=$dbServ;dbname=$dbDbase", $dbUser, $dbPass1,$opt);
 
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    //$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $query='SELECT `*` FROM `keimena` WHERE keimena.category= :cat ORDER BY :ord :ascOrDesc LIMIT :limitValue OFFSET :offsetValue';//? OFFSET ?' ;
     $stmt = $conn->prepare($query);
@@ -31,7 +31,7 @@ try {
     }
 } catch (PDOException $e) {
 
-    echo "Error: " . $e->getMessage();
+    echo "Error: " . $e->getCode()." kai ". $e->getMessage();
 }
 $conn = null;
 ?>
