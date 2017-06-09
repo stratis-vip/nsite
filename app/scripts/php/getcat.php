@@ -1,23 +1,22 @@
 <?php
 require("class_lib.php");
-// $link = new mysqli($dbServ, $dbUser, $dbPass, $dbDbase);
-// $link->query('set names UTF8');
-$conn = new PDO("mysql:host=$dbServ;dbname=$dbDbase", $dbUser, $dbPass,$opt);
 
+echo '{ "status": ';
 
-echo "[";
-$count = 0;
- 
-if ($result = $conn->query("SELECT id,description FROM `keimena_cat` order by `ID`")) {
-    while ($row = $result->fetch()) {
-        if ($count == 0) {
-            echo '{"id":' . $row['id'] . ', "name":"' . $row['description'] . '"}';
-        } else {
-            echo ',{"id":' . $row['id'] . ', "name":"' . $row['description'] . '"}';
-        }
-        $count = $count + 1;
+try {
+    $conn = new PDO("mysql:host=$dbServ;dbname=$dbDbase;charset=utf8", $dbUser, $dbPass, $opt);
+
+    echo  '0, "message":"Επιτυχής σύνδεση", "categories":[';
+    $stmt= $conn->query("SELECT id,description FROM `keimena_cat` order by `ID`");
+    $str="";
+    while ($row = $stmt->fetch()) {
+        $str.= '{"id":' . $row['id'] . ', "name":"' . $row['description'] . '"},';
     }
+
+    echo rtrim($str, ',').']';
+    $stmt=null;
+} catch (PDOException $e) {
+    echo  $e->getCode().', "message":"Αδυναμία Σύνδεσης. Επικοινωνήστε με τον διαχειριστή ('. $e->getMessage().')"';
 }
-echo "]";
-$result=null;
+echo '}';
 $conn=null;
