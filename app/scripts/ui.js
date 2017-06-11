@@ -78,6 +78,18 @@ define(['jquery', 'vbl', 'info','cQ'], function ($, vbl, info,cQ) {
                 }
                 $(this)
                     .prop('disabled', true);
+		    //gia jekina
+			jsonQueryObject=cQ.createQueryJSON();
+		    countQuery=cQ.countPostsFromJSONQuery(jsonQueryObject);
+		    cQ.executeQuery(countQuery,1);
+		         
+
+
+
+
+
+
+		    //
 		    if (vbl.debug){console.log('DEBUG: From CreateQuery |07.1| '+cQ.countPostsFromJSONQuery(JSON.stringify(cQ.createQueryJSON())));}
 		    if (vbl.debug) {
                     console.log('DEBUG: |07| Exiting clickOnSetOptions');

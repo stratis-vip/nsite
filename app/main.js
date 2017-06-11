@@ -42,6 +42,7 @@ require(['vbl', 'jquery', 'ui', 'info', 'gD', 'gC', 'cQ', 'gA', 'bs'],
                 ui.onPressToPrevious();
                 ui.clickOpenSearch();
                 ui.clickOnSetOptions();
+                getAnartiseis.makePagination();
                 getAnartiseis.getAnartiseis(10, 0);
                 ui.initializeNavBar();
                 info.collectInfo()

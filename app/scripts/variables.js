@@ -6,6 +6,7 @@ define(function() {
         if (self.debug) {
             console.log('DEBUG: Entering script app/scripts/variables.js');
         }
+	self.showExplanations=false;
         self.filter = 0;
         self.taxOrder = "ASC";
         self.key = 0;

@@ -65,8 +65,6 @@ define(['jquery', 'vbl'], function ($, vbl) {
 
             } else {
                 queryJSONi.order = "keimena.imnia_auth " + vbl.taxOrder;
-
-
             }
         }
         if (count === undefined) {
@@ -77,14 +75,21 @@ define(['jquery', 'vbl'], function ($, vbl) {
         }
         queryJSON.limit = count;
         queryJSON.offset = offset;
-	    if (vbl.debug){console.log('DEBUG:|05|  Exiting createJSONQuery ');}
+        if (vbl.debug) {
+            console.log('DEBUG:|05|  Exiting createJSONQuery ');
+        }
         return queryJSON;
     }
 
-
-    function createQueryFromJson(q) {
-        if (q === undefined) {
+    function createQueryFromJson(jsonText) {
+        if (jsonText === undefined) {
             return "";
+        }
+        //q ειναι το object που θα φτιάξω από το jsonText
+        if (jsonText !== null && typeof jsonText === 'object') {
+            q = jsonText;
+        } else {
+            q = JSON.parse(jsonText);
         }
         var qString = "";
         qString += 'SELECT ' + q.select + ' FROM ' + q.from;
@@ -103,9 +108,16 @@ define(['jquery', 'vbl'], function ($, vbl) {
         return qString;
     }
 
-    function countPostsFromJSONQuery(q) {
-        if (q === undefined) {
+    function countPostsFromJSONQuery(jsonText) {
+        if (jsonText === undefined) {
             return 0;
+        }
+
+        //q ειναι το object που θα φτιάξω από το jsonText
+        if (jsonText !== null && typeof jsonText === 'object') {
+            q = jsonText;
+        } else {
+            q = JSON.parse(jsonText);
         }
         var qString = "";
         qString += 'SELECT count(*)  FROM ' + q.from;
@@ -127,8 +139,8 @@ define(['jquery', 'vbl'], function ($, vbl) {
     }
 
 
-    function executeQuery(query) {
-        var tipos = 1;
+    function executeQuery(query, tiposOfQuery) {
+        var tipos = tiposOfQuery;
         $.ajax({
             type: "POST",
             url: "app/scripts/php/getTheResults.php",
@@ -143,7 +155,12 @@ define(['jquery', 'vbl'], function ($, vbl) {
                 require(['scripts/prepareResults'], function (prepareResults) {
                     vbl.setCurrentId(vbl.currentId + 1);
                     vbl.setBuffer(data);
-                    prepareResults.prepareResults(data, vbl.currentId);
+                    if (tiposOfQuery === 0) {
+                        prepareResults.prepareResults(data, vbl.currentId);
+                    } else {
+                        alert('makepagination');
+
+                    }
 
                     $("#infoDbRecords")
                         .html(' #' + (vbl.currentId + 1) + ' από ' + vbl.bufferSize + ' ');

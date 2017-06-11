@@ -1,5 +1,8 @@
 define(['jquery', 'vbl'], function ($, vbl) {
     function prepareResults(sqlData, id) {
+        if (vbl.debug) {
+            console.log('DEBUG: Entering prepareResults.js script... ');
+        }
         var sqlDataObj = {};
         sqlDataObj = JSON.parse(sqlData);
         vbl.setBufferSize(sqlDataObj.count);
@@ -23,9 +26,12 @@ define(['jquery', 'vbl'], function ($, vbl) {
             }
             keimeno += "<br></div>";
 
-            if ($.trim(results[id].explanations) !== "") {
-                keimeno += "<div class=\"w3-card\" style=\"width:80%;margin:auto\"><br>" + results[id].explanations + "<br></div>";
+            if (vbl.showExplanations) {
+                if ($.trim(results[id].explanations) !== "") {
+                    keimeno += "<div class=\"w3-card\" style=\"width:80%;margin:auto\"><br>" + results[id].explanations + "<br></div>";
+                }
             }
+
         } else //έχουμε θέμα στη Βάση Δεδομένων
         {
             keimeno = sqlDataObj.message;
@@ -35,6 +41,9 @@ define(['jquery', 'vbl'], function ($, vbl) {
             .html(keimeno);
         $("#loader")
             .hide();
+        if (vbl.debug) {
+            console.log('DEBUG: Exiting app/scripts/prepareResults.js');
+        }
     }
 
     return {
