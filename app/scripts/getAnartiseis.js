@@ -7,8 +7,24 @@ define(['jquery', 'vbl', 'info'], function ($, vbl, info) {
         if (vbl.debug) {
             console.log('DEBUG: Entering getAnartiseis.makePagination...');
         }
+	    var paginationString="";
+	    if (vbl.totalPages===0)
+	    {
+		    $('#paginationPlace').hide();
+	    }
+//	    alert(vbl.totalPages);
+	    /* for (i=0;i<vbl.totalPages;i++){
+	    paginationString=+
+	    
+	    
+	    <li class="page-item"><a class="page-link" href="#">Προηγούμενη</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Επόμενη</a></li>*/
+	    
 
-        var query = '';
+/*        var query = '';
         query += 'SELECT keimena.* FROM keimena ';
 
         if (Number(vbl.key) !== 0) {
@@ -23,7 +39,7 @@ define(['jquery', 'vbl', 'info'], function ($, vbl, info) {
         }
         if (vbl.debug) {
             console.log('|||QUERY->||| ' + query);
-        }
+        }*/
         if (vbl.debug) {
             console.log('DEBUG: ...exiting getAnartiseis.makePagination...');
         }

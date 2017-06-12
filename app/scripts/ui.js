@@ -82,6 +82,10 @@ define(['jquery', 'vbl', 'info','cQ'], function ($, vbl, info,cQ) {
 			jsonQueryObject=cQ.createQueryJSON();
 		    countQuery=cQ.countPostsFromJSONQuery(jsonQueryObject);
 		    cQ.executeQuery(countQuery,1);
+		    require(['gA'],function(getAnartiseis)
+			    {
+				    getAnartiseis.makePagination();
+			    });
 		         
 
 

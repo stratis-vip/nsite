@@ -31,7 +31,6 @@ define(['jquery', 'vbl'], function ($, vbl) {
                     keimeno += "<div class=\"w3-card\" style=\"width:80%;margin:auto\"><br>" + results[id].explanations + "<br></div>";
                 }
             }
-
         } else //έχουμε θέμα στη Βάση Δεδομένων
         {
             keimeno = sqlDataObj.message;
@@ -46,8 +45,43 @@ define(['jquery', 'vbl'], function ($, vbl) {
         }
     }
 
+    function fillPagination(data) {
+        if (vbl.debug) {
+            console.log('DEBUG: Entering fillPagination...');
+        }
+        if (vbl.debug) {
+            console.log(data);
+        }
+        var sqlDataObj = {};
+        sqlDataObj = JSON.parse(data);
+        if (sqlDataObj.status === 0) {
+            vbl.totalPosts = sqlDataObj.count;
+            var x = Math.trunc(vbl.totalPosts / 100);
+	
+            if (x === 0) {
+                vbl.bufferSize = 10;
+		    vbl.totalPages=0;
+            } else {
+                vbl.bufferSize =  x * 10;
+		    vbl.totalPages=Math.trunc(vbl.totalPosts/vbl.bufferSize);
+		    if (vbl.totalPosts % vbl.bufferSize>0)
+		    {
+			    vbl.totalPages++;
+		    }
+            }
+		if (vbl.debug){console.log('DEBUG: '+vbl.totalPages+' seλίδες με  '+vbl.bufferSize+' ανά σελίδα ( η τελευταία έχει '+vbl.totalPosts % vbl.bufferSize+')');}
+        } else {
+            vbl.totalPosts = 0;
+            alert('Δεν υπάρχουν αποτελέσματα!');
+        }
+        if (vbl.debug) {
+            console.log('DEBUG: ...exiting fillPagination');
+        }
+
+    }
     return {
-        prepareResults: prepareResults
+        prepareResults: prepareResults,
+        fillPagination: fillPagination
     };
 
 });

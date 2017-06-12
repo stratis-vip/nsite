@@ -158,8 +158,7 @@ define(['jquery', 'vbl'], function ($, vbl) {
                     if (tiposOfQuery === 0) {
                         prepareResults.prepareResults(data, vbl.currentId);
                     } else {
-                        alert('makepagination');
-
+			    prepareResults.fillPagination(data);
                     }
 
                     $("#infoDbRecords")
