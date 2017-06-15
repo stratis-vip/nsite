@@ -37,7 +37,7 @@ define(['jquery', 'vbl'], function ($, vbl) {
             .fail(function () {
 
                 if (vbl.debug) {
-                    console.log('DEBUG: |01| ...AJAX failed at connect.php. error: ' + data);
+                    console.log('DEBUG: |01| ...AJAX failed at connect.php. error ');
                 }
             });
     }
