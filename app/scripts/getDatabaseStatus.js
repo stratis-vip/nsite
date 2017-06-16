@@ -4,6 +4,8 @@ define(['jquery', 'vbl'], function ($, vbl) {
     }
 
     function getDatabaseStatus(selection) {
+        //Αναφέρεται στα παρακάτω σημεία
+        //app/main.js:23:        getDatabaseStatus.getDatabaseStatus("#dbStatus");
         if (vbl.debug) {
             console.log('DEBUG: |01| Entering function getDatabaseStatus. Sending AJAX to connect.php...');
         }
@@ -41,6 +43,7 @@ define(['jquery', 'vbl'], function ($, vbl) {
                 }
             });
     }
+
     if (vbl.debug) {
         console.log('DEBUG: Exiting script app/scripts/getDatabaseStatus.js');
     }

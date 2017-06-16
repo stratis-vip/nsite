@@ -4,6 +4,9 @@ define(['jquery', 'vbl'], function ($, vbl) {
     }
 
     function createQuery(count, offset) {
+        //Δεν καλείται αυτή η συνάρτηση!!!!
+        //TODO Να διαγραφεί αν είναι να παραμείνει έτσι!
+
         //χτίζω το ερώτημα στη βάση.
         if (vbl.debug) {
             console.log('DEBUG: in createQuery...');
@@ -43,6 +46,10 @@ define(['jquery', 'vbl'], function ($, vbl) {
     }
 
     function createQueryJSON(count, offset) {
+        //Αυτή η συνάρτηση καλείται στα παρακάτω σημεία
+        //app/main.js:49:                        .text(cQ.countPostsFromJSONQuery(cQ.createQueryJSON())));
+        //app/scripts/ui.js:82:                   jsonQueryObject=cQ.createQueryJSON();
+        //app/scripts/ui.js:97:   From CreateQuery |07.1| '+cQ.countPostsFromJSONQuery(JSON.stringify(cQ.createQueryJSON())));}
         //χτίζω το ερώτημα στη βάση.
         if (vbl.debug) {
             console.log('DEBUG: |05| in createJSONQuery...');
@@ -82,6 +89,7 @@ define(['jquery', 'vbl'], function ($, vbl) {
     }
 
     function createQueryFromJson(jsonText) {
+        //Δεν καλείται αυτή η συνάρτηση!!!!
         if (jsonText === undefined) {
             return "";
         }
@@ -109,6 +117,10 @@ define(['jquery', 'vbl'], function ($, vbl) {
     }
 
     function countPostsFromJSONQuery(jsonText) {
+        //Αυτή η συνάρτηση καλείται στα παρακάτω σημεία
+        //app/main.js:49:                 .text(cQ.countPostsFromJSONQuery(cQ.createQueryJSON())));
+        //app/scripts/ui.js:83:           countQuery=cQ.countPostsFromJSONQuery(jsonQueryObject);
+        //app/scripts/ui.js:97:           |07.1| '+cQ.countPostsFromJSONQuery(JSON.stringify(cQ.createQueryJSON())));}
         if (jsonText === undefined) {
             return 0;
         }
@@ -140,6 +152,8 @@ define(['jquery', 'vbl'], function ($, vbl) {
 
 
     function executeQuery(query, tiposOfQuery) {
+        //Αυτή η συνάρτηση καλείται στα παρακάτω σημεία
+        //app/scripts/ui.js:84:               cQ.executeQuery(countQuery,1);
         var tipos = tiposOfQuery;
         $.ajax({
             type: "POST",
@@ -158,7 +172,7 @@ define(['jquery', 'vbl'], function ($, vbl) {
                     if (tiposOfQuery === 0) {
                         prepareResults.prepareResults(data, vbl.currentId);
                     } else {
-			    prepareResults.fillPagination(data);
+                        prepareResults.fillPagination(data);
                     }
 
                     $("#infoDbRecords")

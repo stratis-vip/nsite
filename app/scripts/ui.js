@@ -1,9 +1,11 @@
-define(['jquery', 'vbl', 'info','cQ'], function ($, vbl, info,cQ) {
+define(['jquery', 'vbl', 'info', 'cQ'], function ($, vbl, info, cQ) {
     if (vbl.debug) {
         console.log('DEBUG: Entering script app/scripts/ui.js');
     }
 
     function clickStatistics() {
+        //Αναφέρεται στα παρακάτω σημεία
+        //app/main.js:28:                ui.clickStatistics();
         $("#statistics")
             .on('click', function () {
                 if (vbl.debug) {
@@ -15,6 +17,8 @@ define(['jquery', 'vbl', 'info','cQ'], function ($, vbl, info,cQ) {
     }
 
     function clickOpenOptions() {
+        //Αναφέρεται στα παρακάτω σημεία
+        //app/main.js:29:                ui.clickOpenOptions();
         $("#openButton")
             .on('click', function () {
                 if (vbl.debug) {
@@ -36,6 +40,8 @@ define(['jquery', 'vbl', 'info','cQ'], function ($, vbl, info,cQ) {
     }
 
     function clickOpenSearch() {
+        //Αναφέρεται στα παρακάτω σημεία
+        //app/main.js:43:                ui.clickOpenSearch();
         $("#openSearchButton")
             .on('click', function () {
                 if (vbl.debug) {
@@ -56,8 +62,10 @@ define(['jquery', 'vbl', 'info','cQ'], function ($, vbl, info,cQ) {
             });
     }
 
-
     function clickOnHeader() {
+        //Αναφέρεται στα παρακάτω σημεία
+        //app/main.js:30:                ui.clickOnHeader();
+
         $(".searchHeader")
             .on("click", function () {
                 if (vbl.debug) {
@@ -71,6 +79,9 @@ define(['jquery', 'vbl', 'info','cQ'], function ($, vbl, info,cQ) {
     }
 
     function clickOnSetOptions() {
+        //Αναφέρεται στα παρακάτω σημεία
+        //app/main.js:44:                ui.clickOnSetOptions();
+
         $("#setOptions")
             .on("click", function () {
                 if (vbl.debug) {
@@ -78,30 +89,33 @@ define(['jquery', 'vbl', 'info','cQ'], function ($, vbl, info,cQ) {
                 }
                 $(this)
                     .prop('disabled', true);
-		    //gia jekina
-			jsonQueryObject=cQ.createQueryJSON();
-		    countQuery=cQ.countPostsFromJSONQuery(jsonQueryObject);
-		    cQ.executeQuery(countQuery,1);
-		    require(['gA'],function(getAnartiseis)
-			    {
-				    getAnartiseis.makePagination();
-			    });
-		         
+                //gia jekina
+                jsonQueryObject = cQ.createQueryJSON();
+                countQuery = cQ.countPostsFromJSONQuery(jsonQueryObject);
+                cQ.executeQuery(countQuery, 1);
+                require(['gA'], function (getAnartiseis) {
+                    getAnartiseis.makePagination();
+                });
 
 
 
 
 
 
-		    //
-		    if (vbl.debug){console.log('DEBUG: From CreateQuery |07.1| '+cQ.countPostsFromJSONQuery(JSON.stringify(cQ.createQueryJSON())));}
-		    if (vbl.debug) {
+
+                //
+                if (vbl.debug) {
+                    console.log('DEBUG: From CreateQuery |07.1| ' + cQ.countPostsFromJSONQuery(JSON.stringify(cQ.createQueryJSON())));
+                }
+                if (vbl.debug) {
                     console.log('DEBUG: |07| Exiting clickOnSetOptions');
                 }
             });
     }
 
     function clickOnSearchButton() {
+        //Αναφέρεται στα παρακάτω σημεία
+        //app/main.js:31:                ui.clickOnSearchButton();
         $("#searchButton")
             .on("click", function () {
                 if (vbl.debug) {
@@ -111,6 +125,8 @@ define(['jquery', 'vbl', 'info','cQ'], function ($, vbl, info,cQ) {
     }
 
     function clickOnSearchExactlyButton() {
+        //Αναφέρεται στα παρακάτω σημεία
+        //app/main.js:32:                ui.clickOnSearchExactlyButton();
         $("#searchExactlyButton")
             .on("click", function () {
                 if (vbl.debug) {
@@ -123,6 +139,8 @@ define(['jquery', 'vbl', 'info','cQ'], function ($, vbl, info,cQ) {
     }
 
     function clickOnSearchByNumberButton() {
+        //Αναφέρεται στα παρακάτω σημεία
+        //app/main.js:33:                ui.clickOnSearchByNumberButton();
         $("#searchByNumberButton")
             .on("click", function () {
                 if (vbl.debug) {
@@ -135,6 +153,8 @@ define(['jquery', 'vbl', 'info','cQ'], function ($, vbl, info,cQ) {
     }
 
     function changeTaxOptions() {
+        //Αναφέρεται στα παρακάτω σημεία
+        //app/main.js:34:                ui.changeTaxOptions();
         $("#tax")
             .on("change", function () {
                 if (vbl.debug) {
@@ -153,6 +173,8 @@ define(['jquery', 'vbl', 'info','cQ'], function ($, vbl, info,cQ) {
     }
 
     function changeCategory() {
+        //Αναφέρεται στα παρακάτω σημεία
+        //app/scripts/getCategoriesFromDB.js:36:                ui.changeCategory();
         $("#category")
             .on("change", function () {
                 if (vbl.debug) {
@@ -163,16 +185,20 @@ define(['jquery', 'vbl', 'info','cQ'], function ($, vbl, info,cQ) {
     }
 
     function changeOrderOptions() {
+        //Αναφέρεται στα παρακάτω σημεία
+        //app/main.js:35:                ui.changeOrderOptions();
         $("#order")
             .on("change", function () {
                 if (vbl.debug) {
                     console.log("DEBUG: Entering changeOrderOptions");
                 }
-                 info.setDbInfo();
+                info.setDbInfo();
             });
     }
 
     function onFocusOutSearch() {
+        //Αναφέρεται στα παρακάτω σημεία
+        //app/main.js:36:                ui.onFocusOutSearch();
         $("#searchText")
             .on('focusout', function () {
                 if (vbl.debug) {
@@ -183,6 +209,8 @@ define(['jquery', 'vbl', 'info','cQ'], function ($, vbl, info,cQ) {
     }
 
     function onFocusOutSearchNumber() {
+        //Αναφέρεται στα παρακάτω σημεία
+        //app/main.js:37:                ui.onFocusOutSearchNumber();
         $("#searchNumberText")
             .on('focusout', function () {
                 if (vbl.debug) {
@@ -193,6 +221,8 @@ define(['jquery', 'vbl', 'info','cQ'], function ($, vbl, info,cQ) {
     }
 
     function onPressToFirst() {
+        //Αναφέρεται στα παρακάτω σημεία
+        //app/main.js:39:                ui.onPressToFirst();
         $("#firstButton")
             .on("click", function () {
                 if (vbl.debug) {
@@ -206,6 +236,8 @@ define(['jquery', 'vbl', 'info','cQ'], function ($, vbl, info,cQ) {
     }
 
     function onPressToLast() {
+        //Αναφέρεται στα παρακάτω σημεία
+        //app/main.js:40:                ui.onPressToLast();
         $("#lastButton")
             .on("click", function () {
                 if (vbl.debug) {
@@ -219,7 +251,9 @@ define(['jquery', 'vbl', 'info','cQ'], function ($, vbl, info,cQ) {
     }
 
     function onPressToNext() {
+        //Αναφέρεται στα παρακάτω σημεία
         //το πλήκτρο πήγαινε στην αρχή
+        //app/main.js:41:                ui.onPressToNext();
         $("#nextButton")
             .on("click", function () {
                 if (vbl.debug) {
@@ -232,7 +266,9 @@ define(['jquery', 'vbl', 'info','cQ'], function ($, vbl, info,cQ) {
     }
 
     function onPressToPrevious() {
+        //Αναφέρεται στα παρακάτω σημεία
         //το πλήκτρο πήγαινε στην αρχή
+        //app/main.js:42:                ui.onPressToPrevious();
         $("#prevButton")
             .on("click", function () {
                 if (vbl.debug) {
@@ -245,6 +281,12 @@ define(['jquery', 'vbl', 'info','cQ'], function ($, vbl, info,cQ) {
     }
 
     function initializeNavBar() {
+        //Αναφέρεται στα παρακάτω σημεία
+        //app/main.js:46:                ui.initializeNavBar();
+        //app/scripts/ui.js:233:                initializeNavBar();
+        //app/scripts/ui.js:246:                initializeNavBar();
+        //app/scripts/ui.js:261:                initializeNavBar();
+        //app/scripts/ui.js:275:                initializeNavBar();
         if (vbl.debug) {
             console.log("DEBUG: in function initializeNavBar");
         }
@@ -276,12 +318,14 @@ define(['jquery', 'vbl', 'info','cQ'], function ($, vbl, info,cQ) {
     }
 
     function navigate(record) {
-        require(['scripts/prepareResults'], function (prepR) {
+        //Αναφέρεται στα παρακάτω σημεία
+        //app/scripts/ui.js:309:        navigate(vbl.currentId);
+        require(['scripts/prepareResults'], function (prepareResults) {
             if (vbl.debug) {
                 console.log('DEBUG: Entering function navigate');
             }
             if (typeof vbl.buffer.length !== 'undefined') {
-                prepR.prepareResults(vbl.buffer, record);
+                prepareResults.prepareResults(vbl.buffer, record);
             } else {
                 if (vbl.debug) {
                     console.log('DEBUG: Navigate disabled');

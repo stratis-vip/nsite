@@ -1,4 +1,12 @@
 <?php
+//Eμφανίζεται στα παρακάτω σημεία
+//app/scripts/php/connect.php:2:include("class_lib.php");
+//app/scripts/php/getTheResults.php:2:require("class_lib.php");
+//Το δυαδικό αρχείο app/scripts/php/.connect.php.swp ταιριάζει
+//app/scripts/php/pVars.php:2:include("class_lib.php");
+//app/scripts/php/getcat.php:2:require("class_lib.php");
+//app/scripts/php/testpdo.php:2:include("class_lib.php");
+//
 include("class_lib.php");
 
 echo '{ "status": ';

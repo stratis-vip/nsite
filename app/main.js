@@ -1,3 +1,9 @@
+// sto .vimrc
+//Plugin 'restore_view.vim'
+//
+//map <C-c> "+y
+//nmap <C-b> "+p
+//
 require.config({
     baseUrl: "app",
     paths: {

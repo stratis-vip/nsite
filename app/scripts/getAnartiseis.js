@@ -4,16 +4,18 @@ define(['jquery', 'vbl', 'info'], function ($, vbl, info) {
     }
 
     function makePagination() {
+        //Αναφέρεται στα παρακάτω σημεία
+        //app/scripts/ui.js:87:         getAnartiseis.makePagination();
         if (vbl.debug) {
             console.log('DEBUG: Entering getAnartiseis.makePagination...');
         }
-	    var paginationString="";
-	    if (vbl.totalPages===0)
-	    {
-		    $('#paginationPlace').hide();
-	    }
-//	    alert(vbl.totalPages);
-	    /* for (i=0;i<vbl.totalPages;i++){
+        var paginationString = "";
+        if (vbl.totalPages === 0) {
+            $('#paginationPlace')
+                .hide();
+        }
+        //	    alert(vbl.totalPages);
+        /* for (i=0;i<vbl.totalPages;i++){
 	    paginationString=+
 	    
 	    
@@ -22,30 +24,32 @@ define(['jquery', 'vbl', 'info'], function ($, vbl, info) {
             <li class="page-item"><a class="page-link" href="#">2</a></li>
             <li class="page-item"><a class="page-link" href="#">3</a></li>
             <li class="page-item"><a class="page-link" href="#">Επόμενη</a></li>*/
-	    
 
-/*        var query = '';
-        query += 'SELECT keimena.* FROM keimena ';
 
-        if (Number(vbl.key) !== 0) {
-            query += '	WHERE keimena.category = ' + vbl.key;
-        }
-        if (Number(vbl.filter) !== 0) {
-            if (Number(vbl.filter) === 1) {
-                query += '	ORDER BY keimena.id ' + vbl.taxOrder;
-            } else {
-                query += '	ORDER BY keimena.imnia_auth ' + vbl.taxOrder;
-            }
-        }
-        if (vbl.debug) {
-            console.log('|||QUERY->||| ' + query);
-        }*/
+        /*        var query = '';
+                query += 'SELECT keimena.* FROM keimena ';
+
+                if (Number(vbl.key) !== 0) {
+                    query += '	WHERE keimena.category = ' + vbl.key;
+                }
+                if (Number(vbl.filter) !== 0) {
+                    if (Number(vbl.filter) === 1) {
+                        query += '	ORDER BY keimena.id ' + vbl.taxOrder;
+                    } else {
+                        query += '	ORDER BY keimena.imnia_auth ' + vbl.taxOrder;
+                    }
+                }
+                if (vbl.debug) {
+                    console.log('|||QUERY->||| ' + query);
+                }*/
         if (vbl.debug) {
             console.log('DEBUG: ...exiting getAnartiseis.makePagination...');
         }
     }
 
     function getAnartiseis(count, offset) {
+        //Αναφέρεται στα παρακάτω σημεία
+        //app/main.js:45:                getAnartiseis.getAnartiseis(10, 0);
         //χτίζω το ερώτημα στη βάση.
         if (vbl.debug) {
             console.log('DEBUG: |02| in getAnartiseis...');

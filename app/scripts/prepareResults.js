@@ -1,5 +1,9 @@
 define(['jquery', 'vbl'], function ($, vbl) {
     function prepareResults(sqlData, id) {
+        //Αναφέρεται στα παρακάτω σημεία
+        //app/scripts/createQuery.js:173:       prepareResults.prepareResults(data, vbl.currentId);
+        //app/scripts/ui.js:284:                prepareResults.prepareResults(vbl.buffer, record);
+        //app/scripts/getAnartiseis.js:97:      prepareResults.prepareResults(data, vbl.currentId);
         if (vbl.debug) {
             console.log('DEBUG: Entering prepareResults.js script... ');
         }
@@ -46,6 +50,8 @@ define(['jquery', 'vbl'], function ($, vbl) {
     }
 
     function fillPagination(data) {
+        //Αναφέρεται στα παρακάτω σημεία
+        //app/scripts/createQuery.js:175:                        prepareResults.fillPagination(data);
         if (vbl.debug) {
             console.log('DEBUG: Entering fillPagination...');
         }
@@ -57,19 +63,20 @@ define(['jquery', 'vbl'], function ($, vbl) {
         if (sqlDataObj.status === 0) {
             vbl.totalPosts = sqlDataObj.count;
             var x = Math.trunc(vbl.totalPosts / 100);
-	
+
             if (x === 0) {
                 vbl.bufferSize = 10;
-		    vbl.totalPages=0;
+                vbl.totalPages = 0;
             } else {
-                vbl.bufferSize =  x * 10;
-		    vbl.totalPages=Math.trunc(vbl.totalPosts/vbl.bufferSize);
-		    if (vbl.totalPosts % vbl.bufferSize>0)
-		    {
-			    vbl.totalPages++;
-		    }
+                vbl.bufferSize = x * 10;
+                vbl.totalPages = Math.trunc(vbl.totalPosts / vbl.bufferSize);
+                if (vbl.totalPosts % vbl.bufferSize > 0) {
+                    vbl.totalPages++;
+                }
             }
-		if (vbl.debug){console.log('DEBUG: '+vbl.totalPages+' seλίδες με  '+vbl.bufferSize+' ανά σελίδα ( η τελευταία έχει '+vbl.totalPosts % vbl.bufferSize+')');}
+            if (vbl.debug) {
+                console.log('DEBUG: ' + vbl.totalPages + ' seλίδες με  ' + vbl.bufferSize + ' ανά σελίδα ( η τελευταία έχει ' + vbl.totalPosts % vbl.bufferSize + ')');
+            }
         } else {
             vbl.totalPosts = 0;
             alert('Δεν υπάρχουν αποτελέσματα!');
