@@ -60,9 +60,15 @@ define(function () {
             self.query = newQuery;
             return self.query;
         };
+        self.setTotalPages = function (newTotalPages) {
+            self.totalPages = newTotalPages;
+            return self.totalPages;
+        };
+
         if (self.debug) {
             console.log('DEBUG: Exiting Function Vars() ' + JSON.stringify(self));
         }
     }
+
     return new vars();
 });

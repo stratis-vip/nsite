@@ -1,4 +1,68 @@
 define(['jquery', 'vbl'], function ($, vbl) {
+
+    function makePagination() {
+        //Αναφέρεται στα παρακάτω σημεία
+        //app/scripts/ui.js:87:         getAnartiseis.makePagination();
+        if (vbl.debug) {
+            console.log('DEBUG: Entering getAnartiseis.makePagination...');
+        }
+        var paginationString = "";
+        if (vbl.totalPages === 0) {
+            $('#paginationPlace')
+                .hide();
+        } else {
+            $('#paginationPlace')
+                .show();
+
+            paginationString = '<ul class="pagination" style="margin: 6px 0px -10px 0px;">' +
+                '<li class="disabled page-item"><a class="page-link" href="#">Προηγούμενη</a></li>' +
+                '<li class="active page-item"><a class="page-link" href="#">1</a></li>';
+            for (i = 2; i < vbl.totalPages; i++) {
+                paginationString +=
+                    '<li class="page-item"><a class="page-link" href="#">' + i + '</a></li>';
+
+            }
+            paginationString += '<li class="page-item"><a class="page-link" href="#">Επόμενη</a></li></ul>';
+            $('#paginationPlace')
+                .html(paginationString);
+            $('li.page-item')
+                .on('click', function () {
+                    if ($(this)
+                        .hasClass('active')) {} else {
+                        $('li.active')
+                            .removeClass('active');
+                        $(this)
+                            .addClass('active');
+				var off=Number($(this).text())-1;
+                        require(['cQ'], function (cQ) {
+                            cQ.createQuery(vbl.bufferSize, vbl.bufferSize * off);
+                        });
+                    }
+
+
+                });
+        }
+        /*        var query = '';
+                query += 'SELECT keimena.* FROM keimena ';
+
+                if (Number(vbl.key) !== 0) {
+                    query += '	WHERE keimena.category = ' + vbl.key;
+                }
+                if (Number(vbl.filter) !== 0) {
+                    if (Number(vbl.filter) === 1) {
+                        query += '	ORDER BY keimena.id ' + vbl.taxOrder;
+                    } else {
+                        query += '	ORDER BY keimena.imnia_auth ' + vbl.taxOrder;
+                    }
+                }
+                if (vbl.debug) {
+                    console.log('|||QUERY->||| ' + query);
+                }*/
+        if (vbl.debug) {
+            console.log('DEBUG: ...exiting getAnartiseis.makePagination...');
+        }
+    }
+
     function prepareResults(sqlData, id) {
         //Αναφέρεται στα παρακάτω σημεία
         //app/scripts/createQuery.js:173:       prepareResults.prepareResults(data, vbl.currentId);
@@ -58,34 +122,42 @@ define(['jquery', 'vbl'], function ($, vbl) {
         if (vbl.debug) {
             console.log(data);
         }
-        var sqlDataObj = {};
-        sqlDataObj = JSON.parse(data);
-        if (sqlDataObj.status === 0) {
-            vbl.totalPosts = sqlDataObj.count;
-            var x = Math.trunc(vbl.totalPosts / 100);
+        return new Promise(
+            function (resolve, reject) {
+                var sqlDataObj = {};
+                sqlDataObj = JSON.parse(data);
+                if (sqlDataObj.status === 0) {
+                    vbl.totalPosts = sqlDataObj.count;
+                    var x = Math.trunc(vbl.totalPosts / 100);
 
-            if (x === 0) {
-                vbl.bufferSize = 10;
-                vbl.totalPages = 0;
-            } else {
-                vbl.bufferSize = x * 10;
-                vbl.totalPages = Math.trunc(vbl.totalPosts / vbl.bufferSize);
-                if (vbl.totalPosts % vbl.bufferSize > 0) {
-                    vbl.totalPages++;
+                    if (x === 0) {
+                        vbl.bufferSize = 10;
+                        vbl.totalPages = 0;
+                    } else {
+                        vbl.bufferSize = 25;
+                        var tempPages = Math.trunc(vbl.totalPosts / vbl.bufferSize);
+                        if (vbl.totalPosts % vbl.bufferSize > 0) {
+                            vbl.setTotalPages(++tempPages);
+                        } else {
+                            vbl.setTotalPages(tempPages);
+                        }
+                    }
+
+                    if (vbl.debug) {
+                        console.log('DEBUG: ' + vbl.totalPages + ' seλίδες με  ' + vbl.bufferSize + ' ανά σελίδα ( η τελευταία έχει ' + vbl.totalPosts % vbl.bufferSize + ')');
+                    }
+                } else {
+                    vbl.totalPosts = 0;
+                    alert('Δεν υπάρχουν αποτελέσματα!');
                 }
-            }
-            if (vbl.debug) {
-                console.log('DEBUG: ' + vbl.totalPages + ' seλίδες με  ' + vbl.bufferSize + ' ανά σελίδα ( η τελευταία έχει ' + vbl.totalPosts % vbl.bufferSize + ')');
-            }
-        } else {
-            vbl.totalPosts = 0;
-            alert('Δεν υπάρχουν αποτελέσματα!');
-        }
-        if (vbl.debug) {
-            console.log('DEBUG: ...exiting fillPagination');
-        }
+                if (vbl.debug) {
+                    console.log('DEBUG: ...exiting fillPagination');
+                }
+                resolve(makePagination());
+            });
 
     }
+
     return {
         prepareResults: prepareResults,
         fillPagination: fillPagination

@@ -1,9 +1,3 @@
-// sto .vimrc
-//Plugin 'restore_view.vim'
-//
-//map <C-c> "+y
-//nmap <C-b> "+p
-//
 require.config({
     baseUrl: "app",
     paths: {
@@ -57,20 +51,4 @@ require(['vbl', 'jquery', 'ui', 'info', 'gD', 'gC', 'cQ', 'gA', 'bs'],
                     console.log('DEBUG: Exiting app/main.js');
                 }
             });
-        /*
-         $("#category")
-            .on("change", function () {
-                info.setDbInfo();
-            });
-    });
-    require(['jquery', 'scripts/getStartAnartiseis'], function ($, getStartAnartiseis) {
-        $('#fisrtButton')
-            .on('click', getStartAnartiseis.getStartAnartiseis);
-    
-    require(['scripts/test'], function (t) {
-        console.log('going into test...');
-        console.log(V.someValue + JSON.stringify(V));
-
-    });
-*/
     });

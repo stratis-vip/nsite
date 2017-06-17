@@ -48,6 +48,7 @@ define(['jquery', 'vbl', 'ui', 'info'], function ($, vbl, ui, info) {
     if (vbl.debug) {
         console.log('DEBUG: Exiting app/scripts/getCategoriesFromDB.js...');
     }
+
     return {
         getCategoriesFromDB: getCategoriesFromDB
     };

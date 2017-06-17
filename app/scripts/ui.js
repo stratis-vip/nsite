@@ -93,16 +93,12 @@ define(['jquery', 'vbl', 'info', 'cQ'], function ($, vbl, info, cQ) {
                 jsonQueryObject = cQ.createQueryJSON();
                 countQuery = cQ.countPostsFromJSONQuery(jsonQueryObject);
                 cQ.executeQuery(countQuery, 1);
-                require(['gA'], function (getAnartiseis) {
-                    getAnartiseis.makePagination();
+		    paginate();
+                require(['gA','scripts/prepareResults'], function (getAnartiseis,prepareResults) {
+                    info.collectInfo();
+				//.then(
+			   // prepareResults.fillPagination());
                 });
-
-
-
-
-
-
-
                 //
                 if (vbl.debug) {
                     console.log('DEBUG: From CreateQuery |07.1| ' + cQ.countPostsFromJSONQuery(JSON.stringify(cQ.createQueryJSON())));
@@ -334,6 +330,15 @@ define(['jquery', 'vbl', 'info', 'cQ'], function ($, vbl, info, cQ) {
         });
     }
 
+	function paginate()
+	{
+		$('li.page-item').on('click',function(){
+		$('li.active').removeClass('active');
+		$(this).addClass('active');
+		$('#forDebug').text($(this).text());
+		
+		});
+	}
     if (vbl.debug) {
         console.log('DEBUG: Exiting app/scripts/ui.js...');
     }
@@ -355,6 +360,7 @@ define(['jquery', 'vbl', 'info', 'cQ'], function ($, vbl, info, cQ) {
         onPressToLast: onPressToLast,
         onPressToNext: onPressToNext,
         onPressToPrevious: onPressToPrevious,
-        initializeNavBar: initializeNavBar
+        initializeNavBar: initializeNavBar,
+	    paginate:paginate
     };
 });
