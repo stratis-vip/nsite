@@ -11,38 +11,38 @@ define(['jquery', 'vbl'], function ($, vbl) {
         if (vbl.debug) {
             console.log('DEBUG: in createQuery...');
         }
-        var query = "";
+//        var query = "";
         var queryJSON = {};
-        query += 'SELECT keimena.* FROM keimena ';
+//        query += 'SELECT keimena.* FROM keimena ';
         queryJSON.select = "keimena.*";
         queryJSON.from = "keimena";
         if (Number(vbl.key) !== 0) {
-            query += '	WHERE keimena.category = ' + vbl.key;
+//            query += '	WHERE keimena.category = ' + vbl.key;
             queryJSON.where = "keimena.category = " + vbl.key;
         }
         if (Number(vbl.filter) !== 0) {
             if (Number(vbl.filter) === 1) {
-                query += '	ORDER BY keimena.id ' + vbl.taxOrder;
-                queryJSON.order = "keimena.keimena.id" + vbl.taxOrder;
+//                query += '	ORDER BY keimena.id ' + vbl.taxOrder;
+                queryJSON.order = "keimena.keimena.id " + vbl.taxOrder;
 
             } else {
-                query += '	ORDER BY keimena.imnia_auth ' + vbl.taxOrder;
-                queryJSON = "ORDER BY keimena.imnia_auth " + vbl.taxOrder;
+//                query += '	ORDER BY keimena.imnia_auth ' + vbl.taxOrder;
+                queryJSON.order = "ORDER BY keimena.imnia_auth " + vbl.taxOrder;
 
             }
         }
-        query += ' LIMIT ' + count;
+//        query += ' LIMIT ' + count;
         queryJSON.limit = count;
         queryJSON.offset = offset;
-        if (offset > 0) {
+    /*    if (offset > 0) {
             query += ' OFFSET ' + offset;
 
-        }
+        }*/
         if (vbl.debug) {
-            console.log('DEBUG: query to database= ' + query);
+//            console.log('DEBUG: query to database= ' + query);
             console.log('DEBUG: queryJSON=' + JSON.stringify(queryJSON));
         }
-        return query;
+        return queryJSON;
     }
 
     function createQueryJSON(count, offset) {
@@ -71,7 +71,7 @@ define(['jquery', 'vbl'], function ($, vbl) {
                 queryJSON.order = "keimena.imnia_auth " + vbl.taxOrder;
 
             } else {
-                queryJSONi.order = "keimena.imnia_auth " + vbl.taxOrder;
+                queryJSON.order = "keimena.imnia_auth " + vbl.taxOrder;
             }
         }
         if (count === undefined) {

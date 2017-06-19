@@ -58,10 +58,10 @@ define(['jquery', 'vbl'], function ($, vbl) {
                 var temp = $("#order")
                     .val();
                 switch (temp) {
-                case "0":
+                case "1":
                     vbl.setTaxOrder("ASC");
                     break;
-                case "1":
+                case "2":
                     vbl.setTaxOrder("DESC");
                     break;
                 }

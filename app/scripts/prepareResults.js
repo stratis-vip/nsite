@@ -27,15 +27,27 @@ define(['jquery', 'vbl'], function ($, vbl) {
                 .html(paginationString);
             $('li.page-item')
                 .on('click', function () {
+                    var newPageQuery = '';
+
+                    if (vbl.debug) {
+                        console.log('DEBUG: into page ' + Number($(this)
+                            .text()) + ' click ');
+                    }
                     if ($(this)
                         .hasClass('active')) {} else {
                         $('li.active')
                             .removeClass('active');
                         $(this)
                             .addClass('active');
-				var off=Number($(this).text())-1;
+                        var off = Number($(this)
+                            .text()) - 1;
                         require(['cQ'], function (cQ) {
-                            cQ.createQuery(vbl.bufferSize, vbl.bufferSize * off);
+                            newPageQuery = cQ.createQuery(vbl.bufferSize, vbl.bufferSize * off);
+                            if (vbl.debug) {
+                                console.log('DEBUG: exiting click on page ' + Number($(this)
+                                    .text()) + '  newPageQuery= ' + newPageQuery);
+                            }
+
                         });
                     }
 
