@@ -15,14 +15,14 @@ define(['jquery', 'vbl'], function ($, vbl) {
                 .show();
 
             paginationString = '<ul class="pagination" style="margin: 6px 0px -10px 0px;">' +
-                '<li class="disabled page-item"><a class="page-link" href="#">Προηγούμενη</a></li>' +
+                '<li id="prevPage" class="disabled page-item"><a  class="page-link" href="#">Προηγούμενη</a></li>' +
                 '<li class="active page-item"><a class="page-link" href="#">1</a></li>';
-            for (i = 2; i < vbl.totalPages; i++) {
+            for (i = 2; i < vbl.totalPages+1; i++) {
                 paginationString +=
                     '<li class="page-item"><a class="page-link" href="#">' + i + '</a></li>';
 
             }
-            paginationString += '<li class="page-item"><a class="page-link" href="#">Επόμενη</a></li></ul>';
+            paginationString += '<li id="nextPage" class="page-item"><a class="page-link" href="#">Επόμενη</a></li></ul>';
             $('#paginationPlace')
                 .html(paginationString);
             $('li.page-item')
@@ -41,8 +41,27 @@ define(['jquery', 'vbl'], function ($, vbl) {
                             .addClass('active');
                         var off = Number($(this)
                             .text()) - 1;
+				if (off>0)
+				{
+					$('#prevPage').removeClass('disabled');
+				}else
+				{
+
+					$('#prevPage').addClass('disabled');
+					alert(vbl.totalPages);
+				}
+				if (off>=vbl.totalPages-2)
+				{
+				 $("#nextPage").addClass('disabled');
+				}else
+				{
+					$("#nextPage").removeClass('disabled');
+				}
                         require(['cQ'], function (cQ) {
                             newPageQuery = cQ.createQuery(vbl.bufferSize, vbl.bufferSize * off);
+                            vbl.setCurrentId(-1);
+                            cQ.executeQuery(cQ.createQueryFromJson(newPageQuery), 0);
+
                             if (vbl.debug) {
                                 console.log('DEBUG: exiting click on page ' + Number($(this)
                                     .text()) + '  newPageQuery= ' + newPageQuery);

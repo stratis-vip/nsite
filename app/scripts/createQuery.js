@@ -13,6 +13,8 @@ define(['jquery', 'vbl'], function ($, vbl) {
         }
 //        var query = "";
         var queryJSON = {};
+	    queryJSON.where=null;
+	    queryJSON.order=null;
 //        query += 'SELECT keimena.* FROM keimena ';
         queryJSON.select = "keimena.*";
         queryJSON.from = "keimena";
@@ -101,16 +103,16 @@ define(['jquery', 'vbl'], function ($, vbl) {
         }
         var qString = "";
         qString += 'SELECT ' + q.select + ' FROM ' + q.from;
-        if (q.where.length > 0) {
+        if (q.where !== null && q.where.length > 0) {
             qString += ' WHERE ' + q.where;
         }
-        if (q.order.length > 0) {
+        if (q.order!==null && q.order.length > 0) {
             qString += ' ORDER BY ' + q.order;
         }
-        if (q.limit > 0) {
+        if (q.limit!==null && q.limit > 0) {
             qString += ' LIMIT ' + q.limit;
         }
-        if (q.offset) {
+        if (q.offset !==null && q.offset) {
             qString += ' OFFSET ' + q.offset;
         }
         return qString;
@@ -159,7 +161,7 @@ define(['jquery', 'vbl'], function ($, vbl) {
             type: "POST",
             url: "app/scripts/php/getTheResults.php",
             data: {
-                typeofquery: 1,
+                typeofquery: tiposOfQuery,
                 value: query
             },
             success: function (data) {
