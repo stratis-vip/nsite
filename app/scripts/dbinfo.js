@@ -69,8 +69,8 @@ define(['jquery', 'vbl'], function ($, vbl) {
                     .val());
                 vbl.setSearchNumber(Number($('#searchNumberText')
                     .val()));
-                vbl.key = Number($('input[name=cat]:checked')
-                    .val());
+                vbl.setKey(Number($('input[name=cat]:checked')
+                    .val()));
                 vbl.setFilter(Number($('#tax')
                     .val()));
                 resolve("leaving..");

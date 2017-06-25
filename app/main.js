@@ -43,10 +43,10 @@ require(['vbl', 'jquery', 'ui', 'info', 'gD', 'gC', 'cQ', 'gA', 'bs'],
                 ui.clickOpenSearch();
                 ui.clickOnSetOptions();
                 getAnartiseis.getAnartiseis(10, 0);
-                ui.initializeNavBar();
-                info.collectInfo()
-                    .then($("#forDebug")
-                        .text(cQ.countPostsFromJSONQuery(cQ.createQueryJSON())));
+//                ui.initializeNavBar();
+  //              info.collectInfo()
+    //                .then($("#forDebug")
+      //                  .text(cQ.countPostsFromJSONQuery(cQ.createQuery())));
                 if (vbl.debug) {
                     console.log('DEBUG: Exiting app/main.js');
                 }

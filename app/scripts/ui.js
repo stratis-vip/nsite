@@ -89,19 +89,22 @@ define(['jquery', 'vbl', 'info', 'cQ'], function ($, vbl, info, cQ) {
                 }
                 $(this)
                     .prop('disabled', true);
-                //gia jekina
-                jsonQueryObject = cQ.createQueryJSON();
+                //gia jekinoa
+                vbl.setCurrentId(-1);
+                jsonQueryObject = cQ.createQuery(25, 0);
                 countQuery = cQ.countPostsFromJSONQuery(jsonQueryObject);
                 cQ.executeQuery(countQuery, 1);
-		    paginate();
-                require(['gA','scripts/prepareResults'], function (getAnartiseis,prepareResults) {
+                paginate();
+                cQ.executeQuery(cQ.queryFromJSON(jsonQueryObject), 0);
+
+                require(['gA', 'scripts/prepareResults'], function (getAnartiseis, prepareResults) {
                     info.collectInfo();
-				//.then(
-			   // prepareResults.fillPagination());
+                    //.then(
+                    // prepareResults.fillPagination());
                 });
                 //
                 if (vbl.debug) {
-                    console.log('DEBUG: From CreateQuery |07.1| ' + cQ.countPostsFromJSONQuery(JSON.stringify(cQ.createQueryJSON())));
+                    console.log('DEBUG: From CreateQuery |07.1| ' + cQ.countPostsFromJSONQuery(JSON.stringify(cQ.createQuery())));
                 }
                 if (vbl.debug) {
                     console.log('DEBUG: |07| Exiting clickOnSetOptions');
@@ -110,12 +113,34 @@ define(['jquery', 'vbl', 'info', 'cQ'], function ($, vbl, info, cQ) {
     }
 
     function clickOnSearchButton() {
-        //Αναφέρεται στα παρακάτω σημεία
+      //Αναφέρεται στα παρακάτω σημεία
         //app/main.js:31:                ui.clickOnSearchButton();
         $("#searchButton")
             .on("click", function () {
                 if (vbl.debug) {
                     console.log("DEBUG: Entering clickOnSearchButton");
+                }
+                var query = cQ.createQuery(0, 0);
+                var searchText = "%" + $('#searchText')
+                    .val() + "%";
+                if (query.where === null) {
+                    query.where = [];
+                }
+                query.where.push({
+                    "wTerm": " keimeno LIKE \"" + searchText + '\"'
+                });
+                cQ.executeQuery(cQ.queryFromJSON(query), 0);
+                require(['scripts/prepareResults'], function (prepareResults) {
+                    prepareResults.fillPagination(vbl.buffer);
+                });
+
+
+                if (vbl.debug) {
+                    console.log('DEBUG: searchText=' + searchText + "  query= " + cQ.createQuery(query));
+                }
+
+                if (vbl.debug) {
+                    console.log('DEBUG: ...exiting clickOnSearchButton');
                 }
             });
     }
@@ -128,9 +153,31 @@ define(['jquery', 'vbl', 'info', 'cQ'], function ($, vbl, info, cQ) {
                 if (vbl.debug) {
                     console.log("DEBUG: Entering clickOnSearchExactlyButton");
                 }
+                var query = cQ.createQuery(0, 0);
+                var searchText = $('#searchText')
+                    .val();
+                if (query.where === null) {
+                    query.where = [];
+                }
+                query.where.push({
+                    "wTerm": " keimeno LIKE \"" + searchText + '\"'
+                });
+                cQ.executeQuery(cQ.queryFromJSON(query), 0);
+                //  require(['scripts/prepareResults'], function (prepareResults) {
+                //    prepareResults.fillPagination(vbl.buffer);
+
+
+                if (vbl.debug) {
+                    console.log('DEBUG: searchText=' + searchText + "  query= " + cQ.createQuery(query));
+                }
+
+                if (vbl.debug) {
+                    console.log('DEBUG: ...exiting clickOnSearchButton');
+                }
                 //δημιουργία ερωτήματος
                 //αποστολή ερωτήματος
                 //εμφάνιση αποτελεσμάτων
+                // });
             });
     }
 
@@ -142,9 +189,21 @@ define(['jquery', 'vbl', 'info', 'cQ'], function ($, vbl, info, cQ) {
                 if (vbl.debug) {
                     console.log("DEBUG: Entering clickOnSearchByNumberButton");
                 }
-                //δημιουργία ερωτήματος
-                //αποστολή ερωτήματος
-                //εμφάνιση αποτελεσμάτων
+
+                var query = cQ.createQuery(0, 0);
+                var searchText = $('#searchNumberText')
+                    .val();
+                if (query.where === null) {
+                    query.where = [];
+                }
+                query.where.push({
+                    "wTerm": " keimeno_id LIKE \"" + searchText + '\"'
+                });
+                cQ.executeQuery(cQ.queryFromJSON(query), 0);
+                require(['scripts/prepareResults'], function (prepareResults) {
+                    prepareResults.fillPagination(vbl.buffer);
+                });
+
             });
     }
 
@@ -225,7 +284,7 @@ define(['jquery', 'vbl', 'info', 'cQ'], function ($, vbl, info, cQ) {
                     console.log("DEBUG: in function onPressToStart");
                 }
                 //function code
-                vbl.currentId = 0;
+                vbl.setCurrentId(0);
                 initializeNavBar();
             });
         //το πλήκτρο πήγαινε στην αρχή
@@ -239,7 +298,7 @@ define(['jquery', 'vbl', 'info', 'cQ'], function ($, vbl, info, cQ) {
                 if (vbl.debug) {
                     console.log("DEBUG: in function onPressToLast");
                 }
-                vbl.currentId = vbl.bufferSize - 1;
+                vbl.setCurrentId(vbl.bufferPostsNumber - 1);
                 initializeNavBar();
                 //function code
             });
@@ -255,7 +314,7 @@ define(['jquery', 'vbl', 'info', 'cQ'], function ($, vbl, info, cQ) {
                 if (vbl.debug) {
                     console.log("DEBUG: in function onPressNext");
                 }
-                vbl.currentId++;
+                vbl.incCurrentId();
                 initializeNavBar();
                 //function code
             });
@@ -270,7 +329,7 @@ define(['jquery', 'vbl', 'info', 'cQ'], function ($, vbl, info, cQ) {
                 if (vbl.debug) {
                     console.log("DEBUG: in function onPressToPrevous");
                 }
-                vbl.currentId--;
+                vbl.decCurrentId();
                 initializeNavBar();
                 //function code
             });
@@ -286,31 +345,33 @@ define(['jquery', 'vbl', 'info', 'cQ'], function ($, vbl, info, cQ) {
         if (vbl.debug) {
             console.log("DEBUG: in function initializeNavBar");
         }
-        if (vbl.currentId + 1 > 1) {
-            $("#prevButton")
-                .prop('disabled', false);
-            $("#firstButton")
-                .prop('disabled', false);
-        } else {
-            $("#prevButton")
-                .prop('disabled', true);
-            $("#firstButton")
-                .prop('disabled', true);
+        if (vbl.bufferType === 0) {
+            if (vbl.currentId + 1 > 1) {
+                $("#prevButton")
+                    .prop('disabled', false);
+                $("#firstButton")
+                    .prop('disabled', false);
+            } else {
+                $("#prevButton")
+                    .prop('disabled', true);
+                $("#firstButton")
+                    .prop('disabled', true);
+            }
+            if (vbl.currentId < vbl.bufferPostsNumber - 1) {
+                $("#nextButton")
+                    .prop('disabled', false);
+                $("#lastButton")
+                    .prop('disabled', false);
+            } else {
+                $("#nextButton")
+                    .prop('disabled', true);
+                $("#lastButton")
+                    .prop('disabled', true);
+            }
+            $("#infoDbRecords")
+                .html(' #' + (vbl.currentId + 1) + ' από ' + vbl.bufferPostsNumber + ' ');
+            navigate(vbl.currentId);
         }
-        if (vbl.currentId < vbl.bufferSize - 1) {
-            $("#nextButton")
-                .prop('disabled', false);
-            $("#lastButton")
-                .prop('disabled', false);
-        } else {
-            $("#nextButton")
-                .prop('disabled', true);
-            $("#lastButton")
-                .prop('disabled', true);
-        }
-        $("#infoDbRecords")
-            .html(' #' + (vbl.currentId + 1) + ' από ' + vbl.bufferSize + ' ');
-        navigate(vbl.currentId);
     }
 
     function navigate(record) {
@@ -330,15 +391,96 @@ define(['jquery', 'vbl', 'info', 'cQ'], function ($, vbl, info, cQ) {
         });
     }
 
-	function paginate()
-	{
-		$('li.page-item').on('click',function(){
-		$('li.active').removeClass('active');
-		$(this).addClass('active');
-		$('#forDebug').text($(this).text());
-		
-		});
-	}
+    function paginate() {
+        $('li.page-item')
+            .on('click', function () {
+                $('li.active')
+                    .removeClass('active');
+                $(this)
+                    .addClass('active');
+                $('#forDebug')
+                    .text($(this)
+                        .text());
+            });
+    }
+
+    function onNextPage() {
+        if (vbl.currentPage < vbl.totalPages) {
+            vbl.incCurrentPage();
+            var button = $('#paginationPlace > ul > li:contains("' + vbl.currentPage + '"):first');
+            if (button !== undefined) {
+                onPagePress(button);
+            }
+        } else {
+            //disabled
+            $('#nextPage')
+                .addClass('disabled');
+        }
+    }
+
+    function onPrevPage() {
+        if (vbl.currentPage > 1) {
+            vbl.decCurrentPage();
+            var button = $('#paginationPlace > ul > li:contains("' + vbl.currentPage + '"):first');
+            if (button !== undefined) {
+                onPagePress(button);
+            }
+        } else {
+            $('#prevPage')
+                .addClass('disabled');
+            //disabled
+        }
+    }
+
+
+    function onPagePress(pageNumber) {
+        var newPageQuery = '';
+
+        if (vbl.debug) {
+            console.log('DEBUG: into page ' + Number($(this)
+                .text()) + ' click ');
+        }
+
+        if (pageNumber.hasClass('active')) {} else { //elseThis
+            $('li.active')
+                .removeClass('active');
+            pageNumber
+                .addClass('active');
+            var off = Number(pageNumber
+                .text());
+
+            vbl.setCurrentPage(off);
+            switch (off) {
+            case 1:
+                $('#prevPage')
+                    .addClass('disabled');
+                break;
+            case vbl.totalPages:
+                $('#nextPage')
+                    .addClass('disabled');
+                break;
+            default:
+                $('#nextPage')
+                    .removeClass('disabled');
+                $('#prevPage')
+                    .removeClass('disabled');
+                break;
+            }
+            require(['cQ'], function (cQ) {
+                newPageQuery = cQ.createQuery(vbl.bufferSize, vbl.bufferSize * (off - 1));
+                vbl.setCurrentId(-1);
+                cQ.executeQuery(cQ.queryFromJSON(newPageQuery), 0);
+                initializeNavBar();
+                if (vbl.debug) {
+                    console.log('DEBUG: exiting click on page ' + Number(pageNumber
+                        .text()) + '  newPageQuery= ' + newPageQuery);
+                }
+
+            });
+        }
+
+
+    } //end function:
     if (vbl.debug) {
         console.log('DEBUG: Exiting app/scripts/ui.js...');
     }
@@ -360,7 +502,10 @@ define(['jquery', 'vbl', 'info', 'cQ'], function ($, vbl, info, cQ) {
         onPressToLast: onPressToLast,
         onPressToNext: onPressToNext,
         onPressToPrevious: onPressToPrevious,
+        onPagePress: onPagePress,
+        onNextPage: onNextPage,
+        onPrevPage: onPrevPage,
         initializeNavBar: initializeNavBar,
-	    paginate:paginate
+        paginate: paginate
     };
 });

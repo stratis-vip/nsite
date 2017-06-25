@@ -11,109 +11,70 @@ define(['jquery', 'vbl'], function ($, vbl) {
         if (vbl.debug) {
             console.log('DEBUG: in createQuery...');
         }
-//        var query = "";
         var queryJSON = {};
-	    queryJSON.where=null;
-	    queryJSON.order=null;
-//        query += 'SELECT keimena.* FROM keimena ';
-        queryJSON.select = "keimena.*";
-        queryJSON.from = "keimena";
-        if (Number(vbl.key) !== 0) {
-//            query += '	WHERE keimena.category = ' + vbl.key;
-            queryJSON.where = "keimena.category = " + vbl.key;
-        }
-        if (Number(vbl.filter) !== 0) {
-            if (Number(vbl.filter) === 1) {
-//                query += '	ORDER BY keimena.id ' + vbl.taxOrder;
-                queryJSON.order = "keimena.keimena.id " + vbl.taxOrder;
-
-            } else {
-//                query += '	ORDER BY keimena.imnia_auth ' + vbl.taxOrder;
-                queryJSON.order = "ORDER BY keimena.imnia_auth " + vbl.taxOrder;
-
-            }
-        }
-//        query += ' LIMIT ' + count;
-        queryJSON.limit = count;
-        queryJSON.offset = offset;
-    /*    if (offset > 0) {
-            query += ' OFFSET ' + offset;
-
-        }*/
-        if (vbl.debug) {
-//            console.log('DEBUG: query to database= ' + query);
-            console.log('DEBUG: queryJSON=' + JSON.stringify(queryJSON));
-        }
-        return queryJSON;
-    }
-
-    function createQueryJSON(count, offset) {
-        //Αυτή η συνάρτηση καλείται στα παρακάτω σημεία
-        //app/main.js:49:                        .text(cQ.countPostsFromJSONQuery(cQ.createQueryJSON())));
-        //app/scripts/ui.js:82:                   jsonQueryObject=cQ.createQueryJSON();
-        //app/scripts/ui.js:97:   From CreateQuery |07.1| '+cQ.countPostsFromJSONQuery(JSON.stringify(cQ.createQueryJSON())));}
-        //χτίζω το ερώτημα στη βάση.
-        if (vbl.debug) {
-            console.log('DEBUG: |05| in createJSONQuery...');
-        }
-        var queryJSON = {};
+        queryJSON.where = null;
+        queryJSON.order = null;
         queryJSON.select = "keimena.*";
         queryJSON.from = "keimena";
         if (isNaN(vbl.key)) {
             vbl.key = 0;
         }
+        queryJSON.where = [];
         if (Number(vbl.key) !== 0) {
-            queryJSON.where = "keimena.category = " + vbl.key;
-        } else {
-            queryJSON.where = "";
+            queryJSON.where.push({
+                "wTerm": "keimena.category = " + vbl.key
+            });
         }
-        queryJSON.order = "";
         if (Number(vbl.filter) !== 0) {
             if (Number(vbl.filter) === 1) {
-                queryJSON.order = "keimena.imnia_auth " + vbl.taxOrder;
+                queryJSON.order = "keimeno_id " + vbl.taxOrder;
 
             } else {
-                queryJSON.order = "keimena.imnia_auth " + vbl.taxOrder;
+                queryJSON.order = "ORDER BY keimena.imnia_auth " + vbl.taxOrder;
+
             }
         }
-        if (count === undefined) {
-            count = 0;
+        if (count === undefined || count===0) {
+            count = null;
         }
-        if (offset === undefined) {
-            offset = 0;
+        if (offset === undefined || offset ===0) {
+            offset = null;
         }
+
         queryJSON.limit = count;
         queryJSON.offset = offset;
         if (vbl.debug) {
-            console.log('DEBUG:|05|  Exiting createJSONQuery ');
+            console.log('DEBUG: queryJSON=' + JSON.stringify(queryJSON));
         }
         return queryJSON;
     }
 
-    function createQueryFromJson(jsonText) {
-        //Δεν καλείται αυτή η συνάρτηση!!!!
-        if (jsonText === undefined) {
-            return "";
-        }
-        //q ειναι το object που θα φτιάξω από το jsonText
-        if (jsonText !== null && typeof jsonText === 'object') {
-            q = jsonText;
-        } else {
-            q = JSON.parse(jsonText);
-        }
+    function queryFromJSON(obj) {
+        q = obj;
         var qString = "";
-        qString += 'SELECT ' + q.select + ' FROM ' + q.from;
-        if (q.where !== null && q.where.length > 0) {
-            qString += ' WHERE ' + q.where;
+
+        qString += "SELECT "+q.select +" FROM  "+ q.from;
+
+        if (q.where.length > 0) {
+
+		qString += ' WHERE ';
+            for (i = 0; i < q.where.length; i++) {
+
+                qString +=  q.where[i].wTerm;
+                if (i !== q.where.length - 1) {
+                    qString += " AND  ";
+                }
+
+            }
         }
-        if (q.order!==null && q.order.length > 0) {
+        if (q.order !== null && q.order.length > 0) {
             qString += ' ORDER BY ' + q.order;
         }
-        if (q.limit!==null && q.limit > 0) {
-            qString += ' LIMIT ' + q.limit;
+        if (q.limit !== null && q.limit > 0) {
+            qString += " LIMIT "+q.limit;
         }
-        if (q.offset !==null && q.offset) {
-            qString += ' OFFSET ' + q.offset;
+        if (q.offset !== null && q.offset > 0) {
+            qString += " OFFSET " + q.offset;
         }
         return qString;
     }
@@ -136,18 +97,18 @@ define(['jquery', 'vbl'], function ($, vbl) {
         var qString = "";
         qString += 'SELECT count(*)  FROM ' + q.from;
         if (q.where.length > 0) {
-            qString += ' WHERE ' + q.where;
+		qString += ' WHERE ';
+            for (i = 0; i < q.where.length; i++) {
+                qString += q.where[i].wTerm;
+                if (i !== q.where.length - 1) {
+                    qString += " AND  ";
+                }
+
+            }
         }
-        if (q.order.length > 0) {
+        if (q.order !== null && q.order.length > 0) {
             qString += ' ORDER BY ' + q.order;
         }
-        if (q.limit > 0) {
-            qString += ' LIMIT ' + q.limit;
-        }
-        if (q.offset) {
-            qString += ' OFFSET ' + q.offset;
-        }
-
         return qString;
 
     }
@@ -169,16 +130,18 @@ define(['jquery', 'vbl'], function ($, vbl) {
                     console.log('DEBUG: AJAX returns in getStartAnartiseis');
                 }
                 require(['scripts/prepareResults'], function (prepareResults) {
-                    vbl.setCurrentId(vbl.currentId + 1);
+                    if (tiposOfQuery === 0) {
+                        vbl.setCurrentId(vbl.currentId + 1);
+                    }
                     vbl.setBuffer(data);
                     if (tiposOfQuery === 0) {
                         prepareResults.prepareResults(data, vbl.currentId);
+                        $("#infoDbRecords")
+                            .html(' #' + (vbl.currentId + 1) + ' από ' + vbl.bufferPostsNumber + ' ');
                     } else {
                         prepareResults.fillPagination(data);
                     }
 
-                    $("#infoDbRecords")
-                        .html(' #' + (vbl.currentId + 1) + ' από ' + vbl.bufferSize + ' ');
                 });
             },
             datatype: "json"
@@ -193,9 +156,8 @@ define(['jquery', 'vbl'], function ($, vbl) {
     }
     return {
         createQuery: createQuery,
-        createQueryJSON: createQueryJSON,
         executeQuery: executeQuery,
-        createQueryFromJson: createQueryFromJson,
+        queryFromJSON: queryFromJSON,
         countPostsFromJSONQuery: countPostsFromJSONQuery
     };
 });

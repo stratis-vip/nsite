@@ -29,33 +29,23 @@ define(['jquery', 'vbl', 'info', 'scripts/prepareResults'], function ($, vbl, in
             paginationString += '<li class="page-item"><a class="page-link" href="#">Επόμενη</a></li></ul>';
             $('#paginationPlace')
                 .html(paginationString);
-$('li.page-item').on('click',function(){
-         	if ($(this).hasClass('active')){}else{	
-	       $('li.active').removeClass('active');
-		$(this).addClass('active');
-		var off=$('#forDebug').text($(this));
-	      require(['cQ'],function(cQ){
-	      cQ.CreateQuery(vbl.bufferSize,vbl.bufferSize*off);
-	      });}
-
-});
-        }
-        /*        var query = '';
-                query += 'SELECT keimena.* FROM keimena ';
-
-                if (Number(vbl.key) !== 0) {
-                    query += '	WHERE keimena.category = ' + vbl.key;
-                }
-                if (Number(vbl.filter) !== 0) {
-                    if (Number(vbl.filter) === 1) {
-                        query += '	ORDER BY keimena.id ' + vbl.taxOrder;
-                    } else {
-                        query += '	ORDER BY keimena.imnia_auth ' + vbl.taxOrder;
+            $('li.page-item')
+                .on('click', function () {
+                    if ($(this)
+                        .hasClass('active')) {} else {
+                        $('li.active')
+                            .removeClass('active');
+                        $(this)
+                            .addClass('active');
+                        var off = $('#forDebug')
+                            .text($(this));
+                        require(['cQ'], function (cQ) {
+                            cQ.CreateQuery(vbl.bufferSize, vbl.bufferSize * off);
+                        });
                     }
-                }
-                if (vbl.debug) {
-                    console.log('|||QUERY->||| ' + query);
-                }*/
+
+                });
+        }
         if (vbl.debug) {
             console.log('DEBUG: ...exiting getAnartiseis.makePagination...');
         }
@@ -83,7 +73,7 @@ $('li.page-item').on('click',function(){
         }
         if (Number(vbl.filter) !== 0) {
             if (Number(vbl.filter) === 1) {
-                queryPart += '	ORDER BY keimena.id ' + vbl.taxOrder;
+                queryPart += '	ORDER BY keimeno_id ' + vbl.taxOrder;
             } else {
                 queryPart += '	ORDER BY keimena.imnia_auth ' + vbl.taxOrder;
             }
@@ -120,11 +110,12 @@ $('li.page-item').on('click',function(){
                             console.log('DEBUG: |02| AJAX returns in getStartAnartiseis');
                         }
                         //
-                       // makePagination();
+                        // makePagination();
 
                         //
                         vbl.setCurrentId(vbl.currentId + 1);
                         vbl.setBuffer(data);
+                       // vbl.setBufferType(data.type);
                         if (vbl.debug) {
                             console.log('DEBUG: ...leaving temprarily app/scripts/getAnartiseis.js to execute prepareResults.prepareResults()...');
                         }
@@ -146,8 +137,8 @@ $('li.page-item').on('click',function(){
     }
 
     return {
-        getAnartiseis: getAnartiseis
-//        makePagination: makePagination
+        getAnartiseis: getAnartiseis,
+        makePagination: makePagination
 
     };
 });

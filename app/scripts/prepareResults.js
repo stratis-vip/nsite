@@ -1,4 +1,4 @@
-define(['jquery', 'vbl'], function ($, vbl) {
+define(['jquery', 'vbl', 'ui'], function ($, vbl, ui) {
 
     function makePagination() {
         //Αναφέρεται στα παρακάτω σημεία
@@ -11,84 +11,33 @@ define(['jquery', 'vbl'], function ($, vbl) {
             $('#paginationPlace')
                 .hide();
         } else {
-            $('#paginationPlace')
-                .show();
 
             paginationString = '<ul class="pagination" style="margin: 6px 0px -10px 0px;">' +
                 '<li id="prevPage" class="disabled page-item"><a  class="page-link" href="#">Προηγούμενη</a></li>' +
-                '<li class="active page-item"><a class="page-link" href="#">1</a></li>';
-            for (i = 2; i < vbl.totalPages+1; i++) {
+                '<li class="active page-item pagePointer"><a class="page-link" href="#">1</a></li>';
+            for (i = 2; i < vbl.totalPages + 1; i++) {
                 paginationString +=
-                    '<li class="page-item"><a class="page-link" href="#">' + i + '</a></li>';
+                    '<li class="page-item pagePointer"><a class="page-link" href="#">' + i + '</a></li>';
 
             }
             paginationString += '<li id="nextPage" class="page-item"><a class="page-link" href="#">Επόμενη</a></li></ul>';
+            vbl.setCurrentPage(1);
+
+            $('#paginationPlace')
+                .show();
             $('#paginationPlace')
                 .html(paginationString);
-            $('li.page-item')
-                .on('click', function () {
-                    var newPageQuery = '';
-
-                    if (vbl.debug) {
-                        console.log('DEBUG: into page ' + Number($(this)
-                            .text()) + ' click ');
-                    }
-                    if ($(this)
-                        .hasClass('active')) {} else {
-                        $('li.active')
-                            .removeClass('active');
-                        $(this)
-                            .addClass('active');
-                        var off = Number($(this)
-                            .text()) - 1;
-				if (off>0)
-				{
-					$('#prevPage').removeClass('disabled');
-				}else
-				{
-
-					$('#prevPage').addClass('disabled');
-					alert(vbl.totalPages);
-				}
-				if (off>=vbl.totalPages-2)
-				{
-				 $("#nextPage").addClass('disabled');
-				}else
-				{
-					$("#nextPage").removeClass('disabled');
-				}
-                        require(['cQ'], function (cQ) {
-                            newPageQuery = cQ.createQuery(vbl.bufferSize, vbl.bufferSize * off);
-                            vbl.setCurrentId(-1);
-                            cQ.executeQuery(cQ.createQueryFromJson(newPageQuery), 0);
-
-                            if (vbl.debug) {
-                                console.log('DEBUG: exiting click on page ' + Number($(this)
-                                    .text()) + '  newPageQuery= ' + newPageQuery);
-                            }
-
-                        });
-                    }
-
-
-                });
+            $('li.page-item.pagePointer')
+                .on('click',
+                    function () {
+                        ui.onPagePress($(this));
+                    });
+            $('#prevPage')
+                .on('click', ui.onPrevPage);
+            $('#nextPage')
+                .on('click', ui.onNextPage);
+            ui.initializeNavBar();
         }
-        /*        var query = '';
-                query += 'SELECT keimena.* FROM keimena ';
-
-                if (Number(vbl.key) !== 0) {
-                    query += '	WHERE keimena.category = ' + vbl.key;
-                }
-                if (Number(vbl.filter) !== 0) {
-                    if (Number(vbl.filter) === 1) {
-                        query += '	ORDER BY keimena.id ' + vbl.taxOrder;
-                    } else {
-                        query += '	ORDER BY keimena.imnia_auth ' + vbl.taxOrder;
-                    }
-                }
-                if (vbl.debug) {
-                    console.log('|||QUERY->||| ' + query);
-                }*/
         if (vbl.debug) {
             console.log('DEBUG: ...exiting getAnartiseis.makePagination...');
         }
@@ -104,35 +53,49 @@ define(['jquery', 'vbl'], function ($, vbl) {
         }
         var sqlDataObj = {};
         sqlDataObj = JSON.parse(sqlData);
-        vbl.setBufferSize(sqlDataObj.count);
+        //        vbl.setBufferSize(sqlDataObj.count);
         var keimeno = "";
         if (sqlDataObj.status === 0) {
-            var recordsCount = sqlDataObj.count;
+            vbl.setBufferType(sqlDataObj.type);
+            if (vbl.bufferType === 0) {
+                //επέστρεψε δεδομένα
 
-            var results = sqlDataObj.results;
-            var apotelesma = "";
-            var counter = 1;
-            var katid = 0;
-            keimeno += "<div id=\"keimenoInfo\">";
-            katid = Number(results[id].category) - 1;
-            keimeno += "Κατηγορία: " + vbl.katigories[katid].name;
-            keimeno += "<br>Aριθμός καταχώρισης: " +
-                results[id].cat_id + "" +
-                "<br>Ημερομηνία συγγραφής : " + results[id].date + "</div>" +
-                "<div id=\"keimenoText\"><br>";
-            for (i = 0; i < results[id].keimeno.length; i++) {
-                keimeno += results[id].keimeno[i].str + "<br>";
-            }
-            keimeno += "<br></div>";
+                vbl.setBufferPostsNumber(sqlDataObj.count);
+                var results = sqlDataObj.results;
 
-            if (vbl.showExplanations) {
-                if ($.trim(results[id].explanations) !== "") {
-                    keimeno += "<div class=\"w3-card\" style=\"width:80%;margin:auto\"><br>" + results[id].explanations + "<br></div>";
+                var katid = 0;
+                keimeno += "<div id=\"keimenoInfo\">";
+                katid = Number(results[id].category) - 1;
+                keimeno += "Κατηγορία: " + vbl.katigories[katid].name;
+                keimeno += "<br>Aριθμός καταχώρισης: " +
+                    results[id].cat_id + "" +
+                    "<br>Ημερομηνία συγγραφής : " + results[id].date + "</div>" +
+                    "<div id=\"keimenoText\"><br>";
+                for (i = 0; i < results[id].keimeno.length; i++) {
+                    keimeno += results[id].keimeno[i].str + "<br>";
                 }
+                keimeno += "<br></div>";
+
+                if (vbl.showExplanations) {
+                    if ($.trim(results[id].explanations) !== "") {
+                        keimeno += "<div class=\"w3-card\" style=\"width:80%;margin:auto\"><br>" + results[id].explanations + "<br></div>";
+                    }
+                }
+
+	$("#navBar").show();
+
+            } else {
+                //επέστρεψε αριθμό εγγραφών
+
+
+
+
             }
+
         } else //έχουμε θέμα στη Βάση Δεδομένων
         {
             keimeno = sqlDataObj.message;
+		$("#navBar").hide();
         }
 
         $('#database')
@@ -157,28 +120,38 @@ define(['jquery', 'vbl'], function ($, vbl) {
             function (resolve, reject) {
                 var sqlDataObj = {};
                 sqlDataObj = JSON.parse(data);
+                vbl.setBufferType(sqlDataObj.type);
                 if (sqlDataObj.status === 0) {
-                    vbl.totalPosts = sqlDataObj.count;
-                    var x = Math.trunc(vbl.totalPosts / 100);
+                    // An το type είναι 1 έχουμε απλή καταμέτρηση των αναρτήσεων
+              //      if (sqlDataObj.type === 1) {
+                        vbl.setTotalPosts(sqlDataObj.count);
+                        var x = Math.trunc(vbl.totalPosts / 100);
 
-                    if (x === 0) {
-                        vbl.bufferSize = 10;
-                        vbl.totalPages = 0;
-                    } else {
-                        vbl.bufferSize = 25;
-                        var tempPages = Math.trunc(vbl.totalPosts / vbl.bufferSize);
-                        if (vbl.totalPosts % vbl.bufferSize > 0) {
-                            vbl.setTotalPages(++tempPages);
+                        if (x === 0) {
+                            //αν έχουμε λιγότερα από 10 αποτελέσματα τότε ο buffer θα έχει μόνο αυτά
+                            if (vbl.totalPosts > 10) {
+                                vbl.bufferSize = 10;
+                            } else {
+                                vbl.bufferSize = vbl.totalPosts;
+                            }
+                            vbl.totalPages = 0;
                         } else {
-                            vbl.setTotalPages(tempPages);
+                            vbl.setBufferSize(25);
+                            var tempPages = Math.trunc(vbl.totalPosts / vbl.bufferSize);
+                            if (vbl.totalPosts % vbl.bufferSize > 0) {
+                                vbl.setTotalPages(++tempPages);
+                            } else {
+                                vbl.setTotalPages(tempPages);
+                            }
                         }
-                    }
-
+                  //  } else { //εδώ επιστρέφουν τα κανονικά αποτελέσματα!!!!
+//
+              //      }
                     if (vbl.debug) {
                         console.log('DEBUG: ' + vbl.totalPages + ' seλίδες με  ' + vbl.bufferSize + ' ανά σελίδα ( η τελευταία έχει ' + vbl.totalPosts % vbl.bufferSize + ')');
                     }
                 } else {
-                    vbl.totalPosts = 0;
+                    vbl.setTotalPosts(0);
                     alert('Δεν υπάρχουν αποτελέσματα!');
                 }
                 if (vbl.debug) {

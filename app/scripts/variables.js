@@ -15,34 +15,86 @@ define(function () {
         self.searchNumber = "";
         //σελιδοποίηση
         self.bufferSize = 10;
+        self.bufferType = -1;
         self.totalPosts = 0;
         self.buffer = {};
+        self.bufferPostsNumber = 0;
         self.postsPerPage = 10;
         self.currentId = -1;
+        self.currentPage = -1;
         self.totalPages = 0;
 
         self.query = "";
         self.offset = 0;
+
+        self.setBufferPostsNumber = function (newBufferPostsNumber) {
+            if (self.bufferPostsNumber !== newBufferPostsNumber) {
+                self.bufferPostsNumber = newBufferPostsNumber;
+            }
+            return self.bufferPostsNumber;
+        };
+        self.setBufferType = function (newBufferType) {
+            if (self.bufferType !== newBufferType) {
+                self.bufferType = newBufferType;
+            }
+            return self.bufferType;
+
+        };
+
         self.setFilter = function (newFilter) {
-            self.filter = newFilter;
+            if (self.filter !== newFilter) {
+                self.filter = newFilter;
+            }
             return self.filter;
         };
+        self.setKey = function (newKey) {
+            if (self.key !== newKey) {
+                self.key = newKey;
+            }
+            return self.key;
+        };
         self.setTaxOrder = function (newTaxOrder) {
-            self.taxOrder = newTaxOrder;
+            if (self.taxOrder !== newTaxOrder) {
+                self.taxOrder = newTaxOrder;
+            }
             return self.taxOrder;
         };
         self.setKatigories = function (newObject) {
-            self.katigories = newObject;
+            if (self.katigories !== newObject) {
+                self.katigories = newObject;
+            }
             return self.katigories;
         };
         self.setBuffer = function (newObject) {
             self.buffer = newObject;
             return self.buffer;
         };
+        self.incCurrentId = function () {
+            self.currentId = self.currentId + 1;
+        };
+
+        self.decCurrentId = function () {
+            self.currentId = self.currentId - 1;
+        };
         self.setCurrentId = function (newId) {
             self.currentId = newId;
-
+            require(['ui'], function (ui) {
+                ui.initializeNavBar();
+            });
             return self.currentId;
+
+        };
+        self.setCurrentPage = function (newCurrentPage) {
+            self.currentPage = newCurrentPage;
+            return self.currentPage;
+        };
+        self.incCurrentPage = function () {
+            self.currentPage = self.currentPage + 1;
+            return self.currentPage;
+        };
+        self.decCurrentPage = function () {
+            self.currentPage = self.currentPage - 1;
+            return self.currentPage;
         };
         self.setSearchText = function (newText) {
             self.searchText = newText;
@@ -65,6 +117,10 @@ define(function () {
             return self.totalPages;
         };
 
+        self.setTotalPosts = function (newTotalPosts) {
+            self.totalPosts = newTotalPosts;
+            return self.totalPosts;
+        };
         if (self.debug) {
             console.log('DEBUG: Exiting Function Vars() ' + JSON.stringify(self));
         }

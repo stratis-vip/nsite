@@ -17,7 +17,7 @@ $stmt=$conn->prepare($_POST['value']);
         if ($numberOfPosts>0) {
             switch ($test) {
             case GET_RESULTS: //0
-                $resultString .= '{"status": 0, ' . $nl . '"message":"Βρέθηκαν εγγραφές", "count":'.$numberOfPosts.','.$nl
+                $resultString .= '{"type": 0, "status": 0, ' . $nl . '"message":"Βρέθηκαν εγγραφές", "count":'.$numberOfPosts.','.$nl
                 .'"results":['.$nl;
             //Βρέθηκαν εγγραφές
             $stmt->execute();
@@ -33,7 +33,7 @@ $stmt=$conn->prepare($_POST['value']);
         case COUNT_RESULTS: //1
         $stmt->execute();
 $row=$stmt->fetch();
-                $resultString .= '{"status": 0, ' . $nl . '"message":"Βρέθηκαν εγγραφές", "count":'.$row['count(*)'].'}';
+                $resultString .= '{"type": 1, "status": 0, ' . $nl . '"message":"Βρέθηκαν εγγραφές", "count":'.$row['count(*)'].'}';
             break;
             //end case 1
         default:
