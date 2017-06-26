@@ -1,4 +1,4 @@
-define(['jquery', 'vbl', 'ui'], function ($, vbl, ui) {
+define(['jquery', 'vbl', 'ui'], function($, vbl, ui) {
 
     function makePagination() {
         //Αναφέρεται στα παρακάτω σημεία
@@ -7,29 +7,34 @@ define(['jquery', 'vbl', 'ui'], function ($, vbl, ui) {
             console.log('DEBUG: Entering getAnartiseis.makePagination...');
         }
         var paginationString = "";
-        if (vbl.totalPages <2) {
+        if (vbl.totalPages < 2) {
             $('#paginationPlace')
                 .hide();
         } else {
 
             paginationString = '<ul class="pagination" style="margin: 6px 0px -10px 0px;">' +
-                '<li id="prevPage" class="disabled page-item"><a  class="page-link" href="#">Προηγούμενη</a></li>' +
-                '<li class="active page-item pagePointer"><a class="page-link" href="#">1</a></li>';
+                '<li id="prevPage" class="page-item"><a  class="page-link" href="#">Προηγούμενη</a></li>' +
+                '<li class="page-item pagePointer"><a class="page-link" href="#">1</a></li>';
             for (i = 2; i < vbl.totalPages + 1; i++) {
                 paginationString +=
                     '<li class="page-item pagePointer"><a class="page-link" href="#">' + i + '</a></li>';
 
             }
+            //vbl.setCurrentPage(1);
+
+           
             paginationString += '<li id="nextPage" class="page-item"><a class="page-link" href="#">Επόμενη</a></li></ul>';
-            vbl.setCurrentPage(1);
+
 
             $('#paginationPlace')
                 .html(paginationString);
+            $('#paginationPlace > ul > li:contains("' + vbl.currentPage + '"):first').addClass('active'); 
+
             $('#paginationPlace')
                 .show();
             $('li.page-item.pagePointer')
                 .on('click',
-                    function () {
+                    function() {
                         ui.onPagePress($(this));
                     });
             $('#prevPage')
@@ -120,7 +125,7 @@ define(['jquery', 'vbl', 'ui'], function ($, vbl, ui) {
             console.log(data);
         }
         return new Promise(
-            function (resolve, reject) {
+            function(resolve, reject) {
                 var sqlDataObj = {};
                 sqlDataObj = JSON.parse(data);
                 vbl.setBufferType(sqlDataObj.type);
@@ -150,6 +155,7 @@ define(['jquery', 'vbl', 'ui'], function ($, vbl, ui) {
                         } else {
                             vbl.setTotalPages(tempPages);
                         }
+                        vbl.setCurrentPage(1);
                     }
                     //  } else { //εδώ επιστρέφουν τα κανονικά αποτελέσματα!!!!
                     //

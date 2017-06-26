@@ -78,9 +78,12 @@ define(function () {
         };
         self.setCurrentId = function (newId) {
             self.currentId = newId;
+            if (self.currentId>=0)
+            {
             require(['ui'], function (ui) {
                 ui.initializeNavBar();
             });
+            }
             return self.currentId;
 
         };
