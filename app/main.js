@@ -23,13 +23,14 @@ require(['vbl', 'jquery', 'ui', 'info', 'gD', 'gC', 'cQ', 'gA', 'bs'],
         getDatabaseStatus.getDatabaseStatus("#dbStatus");
         $('document')
             .ready(function () {
-                $("#setOptions")
+                $('#searchButton')
+                    .prop("disabled", true);
+                $('#searchByNumberButton')
                     .prop("disabled", true);
                 ui.clickStatistics();
                 ui.clickOpenOptions();
                 ui.clickOnHeader();
                 ui.clickOnSearchButton();
-                ui.clickOnSearchExactlyButton();
                 ui.clickOnSearchByNumberButton();
                 ui.changeTaxOptions();
                 ui.changeOrderOptions();
@@ -43,10 +44,37 @@ require(['vbl', 'jquery', 'ui', 'info', 'gD', 'gC', 'cQ', 'gA', 'bs'],
                 ui.clickOpenSearch();
                 ui.clickOnSetOptions();
                 getAnartiseis.getAnartiseis(10, 0);
-//                ui.initializeNavBar();
-  //              info.collectInfo()
-    //                .then($("#forDebug")
-      //                  .text(cQ.countPostsFromJSONQuery(cQ.createQuery())));
+                $('#searchText')
+                    .on('input', function () {
+                        if ($('#searchText')
+                            .val()
+                            .length > 2) {
+                            $('#searchButton')
+                                .prop("disabled", false);
+                        } else {
+                            $('#searchButton')
+                                .prop("disabled", true);
+                        }
+                    });
+                $('#searchNumberText')
+                    .on('input', function () {
+                        if (Number.isInteger(Number($('#searchNumberText')
+                                .val()))) {
+                            $('#searchByNumberButton')
+                                .prop("disabled", false);
+                        } else {
+                            $('#searchByNumberButton')
+                                .prop("disabled", true);
+                        }
+
+                    });
+
+
+
+
+
+
+
                 if (vbl.debug) {
                     console.log('DEBUG: Exiting app/main.js');
                 }

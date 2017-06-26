@@ -12,7 +12,7 @@ include("class_lib.php");
 echo '{ "status": ';
 try {
     $conn = new PDO("mysql:host=$dbServ;dbname=$dbDbase;charset=utf8", $dbUser, $dbPass, $opt);
-    echo  '0, "message":"Επιτυχής σύνδεση '.$dbServ.'", "categories":[';
+    echo  '0, "message":"Επιτυχής σύνδεση", "categories":[';
 
     $stmt=$conn->query('SELECT count(*) AS cc,`description` FROM `keimena`,`keimena_cat`  where `category` = `keimena_cat`.`id` group by `category`');
     $str="";

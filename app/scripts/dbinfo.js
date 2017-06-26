@@ -23,17 +23,11 @@ define(['jquery', 'vbl'], function ($, vbl) {
                     if (vbl.debug) {
                         console.log('DEBUG: Promise from collectInfo() resolved. ');
                     }
-                    info += "Το φίλτρο είναι " + vbl.filter + " ενώ η ταξινομηση είναι  " + vbl.taxOrder + " το κλειδί είναι " + vbl.key;
                     if (vbl.key === 0) {
                         info += " «σε όλες τις κατηγορίες»";
                     } else {
                         var lkey = Number(vbl.key) - 1;
-                        info += " στην κατηγορία «" + vbl.katigories[lkey].name + "»]";
-                        $("#curInfo")
-                            .text(info);
                     }
-                    $("#setOptions")
-                        .prop("disabled", false);
                     if (vbl.debug) {
                         console.log("DEBUG: vbl.vars() informed succesfully!\r\n...leaving setDbInfo()");
                     }

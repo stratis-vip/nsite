@@ -16,7 +16,6 @@ define(['jquery', 'vbl', 'info', 'scripts/prepareResults'], function ($, vbl, in
         } else {
             $('#paginationPlace')
                 .show();
-            alert(vbl.totalPages);
 
             paginationString = '<ul class="pagination" style="margin: 6px 0px -10px 0px;">' +
                 '<li class="disabled page-item"><a class="page-link" href="#">Προηγούμενη</a></li>' +

@@ -49,6 +49,9 @@ define(['jquery', 'vbl', 'info', 'cQ'], function ($, vbl, info, cQ) {
                 }
                 if ($.trim(($("#titleSearch")
                         .text())) == "Άνοιγμα Αναζήτησης") {
+				
+				$('#searchText').val('');
+				$('#searchNumberText').val('');
                     $("#titleSearch")
                         .html(" Kλείσιμο Αναζήτησης");
                     $("#mySearchBar")
@@ -89,10 +92,12 @@ define(['jquery', 'vbl', 'info', 'cQ'], function ($, vbl, info, cQ) {
                 }
                 $(this)
                     .prop('disabled', true);
+		    $('#paginationPlace').hide();
+		    $('#navBar').hide();
                 //gia jekinoa
                 vbl.setCurrentId(-1);
                 jsonQueryObject = cQ.createQuery(25, 0);
-                countQuery = cQ.countPostsFromJSONQuery(jsonQueryObject);
+                var countQuery = cQ.countPostsFromJSONQuery(jsonQueryObject);
                 cQ.executeQuery(countQuery, 1);
                 paginate();
                 cQ.executeQuery(cQ.queryFromJSON(jsonQueryObject), 0);
@@ -113,55 +118,24 @@ define(['jquery', 'vbl', 'info', 'cQ'], function ($, vbl, info, cQ) {
     }
 
     function clickOnSearchButton() {
-      //Αναφέρεται στα παρακάτω σημεία
-        //app/main.js:31:                ui.clickOnSearchButton();
-        $("#searchButton")
-            .on("click", function () {
-                if (vbl.debug) {
-                    console.log("DEBUG: Entering clickOnSearchButton");
-                }
-                var query = cQ.createQuery(0, 0);
-                var searchText = "%" + $('#searchText')
-                    .val() + "%";
-                if (query.where === null) {
-                    query.where = [];
-                }
-                query.where.push({
-                    "wTerm": " keimeno LIKE \"" + searchText + '\"'
-                });
-                cQ.executeQuery(cQ.queryFromJSON(query), 0);
-                require(['scripts/prepareResults'], function (prepareResults) {
-                    prepareResults.fillPagination(vbl.buffer);
-                });
-
-
-                if (vbl.debug) {
-                    console.log('DEBUG: searchText=' + searchText + "  query= " + cQ.createQuery(query));
-                }
-
-                if (vbl.debug) {
-                    console.log('DEBUG: ...exiting clickOnSearchButton');
-                }
-            });
-    }
-
-    function clickOnSearchExactlyButton() {
         //Αναφέρεται στα παρακάτω σημεία
         //app/main.js:32:                ui.clickOnSearchExactlyButton();
-        $("#searchExactlyButton")
+        $("#searchButton")
             .on("click", function () {
                 if (vbl.debug) {
                     console.log("DEBUG: Entering clickOnSearchExactlyButton");
                 }
                 var query = cQ.createQuery(0, 0);
-                var searchText = $('#searchText')
-                    .val();
+                var searchText = $('#searchText')            .val();
                 if (query.where === null) {
                     query.where = [];
                 }
                 query.where.push({
-                    "wTerm": " keimeno LIKE \"" + searchText + '\"'
+                    "wTerm": " keimeno LIKE \"%" + searchText + '%\"'
                 });
+                var countQuery = cQ.countPostsFromJSONQuery(query);
+                cQ.executeQuery(countQuery, 1);
+                paginate();
                 cQ.executeQuery(cQ.queryFromJSON(query), 0);
                 //  require(['scripts/prepareResults'], function (prepareResults) {
                 //    prepareResults.fillPagination(vbl.buffer);
@@ -191,15 +165,23 @@ define(['jquery', 'vbl', 'info', 'cQ'], function ($, vbl, info, cQ) {
                 }
 
                 var query = cQ.createQuery(0, 0);
-                var searchText = $('#searchNumberText')
-                    .val();
+                var searchText = Number($('#searchNumberText')
+                    .val());
+		    $('#searchNumberText').val(searchText);
                 if (query.where === null) {
                     query.where = [];
                 }
                 query.where.push({
                     "wTerm": " keimeno_id LIKE \"" + searchText + '\"'
                 });
+		
+var countQuery = cQ.countPostsFromJSONQuery(query);
+                cQ.executeQuery(countQuery, 1);
+                paginate();
                 cQ.executeQuery(cQ.queryFromJSON(query), 0);
+
+
+
                 require(['scripts/prepareResults'], function (prepareResults) {
                     prepareResults.fillPagination(vbl.buffer);
                 });
@@ -216,6 +198,8 @@ define(['jquery', 'vbl', 'info', 'cQ'], function ($, vbl, info, cQ) {
                     console.log("DEBUG: Entering changeTaxOptions");
                 }
                 info.setDbInfo();
+
+		    $('#setOptions').prop('disabled',false );
                 if ($('#tax')
                     .val() > 0) {
                     $('#order')
@@ -235,6 +219,7 @@ define(['jquery', 'vbl', 'info', 'cQ'], function ($, vbl, info, cQ) {
                 if (vbl.debug) {
                     console.log('DEBUG: Entering function changeCategory');
                 }
+		    $('#setOptions').prop('disabled', false);
                 info.setDbInfo();
             });
     }
@@ -371,6 +356,7 @@ define(['jquery', 'vbl', 'info', 'cQ'], function ($, vbl, info, cQ) {
             $("#infoDbRecords")
                 .html(' #' + (vbl.currentId + 1) + ' από ' + vbl.bufferPostsNumber + ' ');
             navigate(vbl.currentId);
+		$('#navBar').show();
         }
     }
 
@@ -490,7 +476,6 @@ define(['jquery', 'vbl', 'info', 'cQ'], function ($, vbl, info, cQ) {
         clickOnHeader: clickOnHeader,
         clickOpenSearch: clickOpenSearch,
         clickOnSearchButton: clickOnSearchButton,
-        clickOnSearchExactlyButton: clickOnSearchExactlyButton,
         clickOnSearchByNumberButton: clickOnSearchByNumberButton,
         clickOnSetOptions: clickOnSetOptions,
         changeTaxOptions: changeTaxOptions,

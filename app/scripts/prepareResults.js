@@ -7,7 +7,7 @@ define(['jquery', 'vbl', 'ui'], function ($, vbl, ui) {
             console.log('DEBUG: Entering getAnartiseis.makePagination...');
         }
         var paginationString = "";
-        if (vbl.totalPages === 0) {
+        if (vbl.totalPages <2) {
             $('#paginationPlace')
                 .hide();
         } else {
@@ -24,9 +24,9 @@ define(['jquery', 'vbl', 'ui'], function ($, vbl, ui) {
             vbl.setCurrentPage(1);
 
             $('#paginationPlace')
-                .show();
-            $('#paginationPlace')
                 .html(paginationString);
+            $('#paginationPlace')
+                .show();
             $('li.page-item.pagePointer')
                 .on('click',
                     function () {
@@ -65,6 +65,9 @@ define(['jquery', 'vbl', 'ui'], function ($, vbl, ui) {
 
                 var katid = 0;
                 keimeno += "<div id=\"keimenoInfo\">";
+                if (id === -1) {
+                    id = 0;
+                }
                 katid = Number(results[id].category) - 1;
                 keimeno += "Κατηγορία: " + vbl.katigories[katid].name;
                 keimeno += "<br>Aριθμός καταχώρισης: " +
@@ -82,7 +85,6 @@ define(['jquery', 'vbl', 'ui'], function ($, vbl, ui) {
                     }
                 }
 
-	$("#navBar").show();
 
             } else {
                 //επέστρεψε αριθμό εγγραφών
@@ -95,7 +97,8 @@ define(['jquery', 'vbl', 'ui'], function ($, vbl, ui) {
         } else //έχουμε θέμα στη Βάση Δεδομένων
         {
             keimeno = sqlDataObj.message;
-		$("#navBar").hide();
+            $("#navBar")
+                .hide();
         }
 
         $('#database')
@@ -123,36 +126,39 @@ define(['jquery', 'vbl', 'ui'], function ($, vbl, ui) {
                 vbl.setBufferType(sqlDataObj.type);
                 if (sqlDataObj.status === 0) {
                     // An το type είναι 1 έχουμε απλή καταμέτρηση των αναρτήσεων
-              //      if (sqlDataObj.type === 1) {
+                    if (sqlDataObj.type === 1) {
                         vbl.setTotalPosts(sqlDataObj.count);
-                        var x = Math.trunc(vbl.totalPosts / 100);
+                        // var x = Math.trunc(vbl.totalPosts / 100);
 
-                        if (x === 0) {
-                            //αν έχουμε λιγότερα από 10 αποτελέσματα τότε ο buffer θα έχει μόνο αυτά
-                            if (vbl.totalPosts > 10) {
-                                vbl.bufferSize = 10;
-                            } else {
-                                vbl.bufferSize = vbl.totalPosts;
-                            }
-                            vbl.totalPages = 0;
-                        } else {
+                        // if (x === 0) {
+                        //αν έχουμε λιγότερα από 10 αποτελέσματα τότε ο buffer θα έχει μόνο αυτά
+                        if (vbl.totalPosts > 25) {
                             vbl.setBufferSize(25);
-                            var tempPages = Math.trunc(vbl.totalPosts / vbl.bufferSize);
-                            if (vbl.totalPosts % vbl.bufferSize > 0) {
-                                vbl.setTotalPages(++tempPages);
-                            } else {
-                                vbl.setTotalPages(tempPages);
-                            }
+                            //		     	$('#navBar')                            .show();
+
+
+                        } else {
+
+                            //		     	$('#navBar')                            .hide();
+                            vbl.setBufferSize(vbl.totalPosts);
+                            //    vbl.setTotalPages(0);
                         }
-                  //  } else { //εδώ επιστρέφουν τα κανονικά αποτελέσματα!!!!
-//
-              //      }
+
+                        var tempPages = Math.trunc(vbl.totalPosts / vbl.bufferSize);
+                        if (vbl.totalPosts % vbl.bufferSize > 0) {
+                            vbl.setTotalPages(++tempPages);
+                        } else {
+                            vbl.setTotalPages(tempPages);
+                        }
+                    }
+                    //  } else { //εδώ επιστρέφουν τα κανονικά αποτελέσματα!!!!
+                    //
+                    //      }
                     if (vbl.debug) {
                         console.log('DEBUG: ' + vbl.totalPages + ' seλίδες με  ' + vbl.bufferSize + ' ανά σελίδα ( η τελευταία έχει ' + vbl.totalPosts % vbl.bufferSize + ')');
                     }
                 } else {
                     vbl.setTotalPosts(0);
-                    alert('Δεν υπάρχουν αποτελέσματα!');
                 }
                 if (vbl.debug) {
                     console.log('DEBUG: ...exiting fillPagination');

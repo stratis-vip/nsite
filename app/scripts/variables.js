@@ -2,7 +2,7 @@ define(function () {
 
     function vars() {
         var self = this;
-        self.debug = true;
+        self.debug = false;
         if (self.debug) {
             console.log('DEBUG: Entering script app/scripts/variables.js');
         }

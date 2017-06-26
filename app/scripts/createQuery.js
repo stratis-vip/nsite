@@ -81,9 +81,6 @@ define(['jquery', 'vbl'], function ($, vbl) {
 
     function countPostsFromJSONQuery(jsonText) {
         //Αυτή η συνάρτηση καλείται στα παρακάτω σημεία
-        //app/main.js:49:                 .text(cQ.countPostsFromJSONQuery(cQ.createQueryJSON())));
-        //app/scripts/ui.js:83:           countQuery=cQ.countPostsFromJSONQuery(jsonQueryObject);
-        //app/scripts/ui.js:97:           |07.1| '+cQ.countPostsFromJSONQuery(JSON.stringify(cQ.createQueryJSON())));}
         if (jsonText === undefined) {
             return 0;
         }
@@ -116,7 +113,6 @@ define(['jquery', 'vbl'], function ($, vbl) {
 
     function executeQuery(query, tiposOfQuery) {
         //Αυτή η συνάρτηση καλείται στα παρακάτω σημεία
-        //app/scripts/ui.js:84:               cQ.executeQuery(countQuery,1);
         var tipos = tiposOfQuery;
         $.ajax({
             type: "POST",
@@ -131,13 +127,14 @@ define(['jquery', 'vbl'], function ($, vbl) {
                 }
                 require(['scripts/prepareResults'], function (prepareResults) {
                     if (tiposOfQuery === 0) {
-                        vbl.setCurrentId(vbl.currentId + 1);
+                        vbl.setCurrentId(0);
                     }
                     vbl.setBuffer(data);
                     if (tiposOfQuery === 0) {
                         prepareResults.prepareResults(data, vbl.currentId);
                         $("#infoDbRecords")
                             .html(' #' + (vbl.currentId + 1) + ' από ' + vbl.bufferPostsNumber + ' ');
+                        prepareResults.fillPagination(data);
                     } else {
                         prepareResults.fillPagination(data);
                     }
