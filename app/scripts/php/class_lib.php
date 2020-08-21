@@ -1,5 +1,5 @@
 <?php
-$htServ  = "http://newdbase.texnopraksis.com/";
+$htServ  = "https://newdbase.texnopraksis.com/";
 $dbUser  = "dbaseuser";
 //$dbServ="db22.papaki.gr";
 $dbServ  = "127.0.0.1";
